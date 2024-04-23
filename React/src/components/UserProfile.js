@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import UserSideBar from "./UserSideBar.js";
 import AccountSettings from "./AccountSettings.js";
 import '../styles/UserProfile.css';
+import HeaderComponent from './HeaderComponent.js';
+import FooterComponent from "./FooterComponent.js";
 
 const UserProfile = () => {
 
@@ -11,6 +13,8 @@ const UserProfile = () => {
 
     // alert(activepage)
   return (
+    <>
+     <HeaderComponent/>
     <div className='userprofile'>
       
         {/* UserProfile , showing {activepage}
@@ -25,6 +29,8 @@ const UserProfile = () => {
             </div>
          </div>
         </div>
+        <FooterComponent/>
+        </>
   )
 }
 

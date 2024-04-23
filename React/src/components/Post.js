@@ -1,8 +1,12 @@
 import React from "react";
 import "../styles/post.css";
+import HeaderComponent from "./HeaderComponent.js";
+import FooterComponent from "./FooterComponent.js";
 
 function Post() {
   return (
+    <>
+    <HeaderComponent/>
     <div class ="root">
     <div class="post-container">
       <div class="column">
@@ -34,6 +38,8 @@ function Post() {
       </div>
     </div>
     </div>
+    <FooterComponent/>
+    </>
   );
 }
 

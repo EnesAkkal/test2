@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600&display=swap");
 
-* {
+
+ * {
    margin: 0;
    padding: 0;
    box-sizing: inherit;
 }
 
-html {
+ html {
    font-size: 62.5%;
    box-sizing: border-box;
 }
@@ -24,7 +25,7 @@ body {
    line-height: 1.5;
 }
 
-.container-profile {
+.containerProfile {
    width: 100%;
    padding: 0 15px;
    margin: 0 auto;
@@ -49,7 +50,7 @@ body {
    background-color: white;
 }
 
-.card-header {
+.cardHeader {
    background-image: url(../assets/pp1.jpg);
    background-size: cover;
    background-position: center center;
@@ -57,7 +58,7 @@ body {
    position: relative;
 }
 
-.card-header .user-img {
+.cardHeader .user-img {
    display: inline-block;
    max-width: 100%;
    width: 120px;
@@ -74,26 +75,26 @@ body {
    transform: translate(-50%, 30%);
 }
 
-.card-content {
+.cardContent {
    padding: 5rem 2rem 4rem;
    text-align: center;
 }
 
-.card-content .description {
+.cardContent .description {
    margin-bottom: 2rem;
 }
 
-.card-content h1 {
+.carContent h1 {
    font-size: 1.5rem;
    color: #262b40;
 }
 
-.card-content p {
+.cardContent p {
    font-size: 1.4rem;
    margin: 0.3rem 0;
 }
 
-.card-content small {
+.cardContent small {
    font-size: 1.2rem;
    color: #858585;
 }
@@ -117,7 +118,7 @@ body {
       height: 2.8rem !important;
 }
 
-.button-1{
+.button1{
    padding-bottom: 10px;
 }
 

@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import '../styles/UserSideBar.css';
 
-
 const UserSideBar = ({ activepage }) => {
   return (
+    <>
     <div className='usersidebar'>
         {
         activepage === 'accountsettings' ?
@@ -102,6 +102,7 @@ const UserSideBar = ({ activepage }) => {
           </Link>
       }
     </div>
+    </>
   )
 }
 

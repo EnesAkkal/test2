@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { request, setAuthHeader } from '../helpers/axios_helper.js';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser,faEnvelope,faLock } from '@fortawesome/free-solid-svg-icons';
-import '../styles/homepage.css';
+import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import '../styles/loginformpage.css';
+import useAuth from 'hooks/useAuth.js';
+import axios from 'api/axios.js';
 
-function LoginFormPageComponent() { 
+const LOGIN_URL = '/login';
+const REGISTER_URL = '/register';
+
+function LoginFormPageComponent() {
     const [formData, setFormData] = useState({ username: '', email: '', password: '' });
-    const [signUpMode, setSignUpMode] = useState(true);
-    const [error, setError] = useState(null);
+    const [signUpMode, setSignUpMode] = useState(false);
+    const [error, setErrMsg] = useState(null);
+    const { setAuth } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const handleFormToggle = () => {
         setSignUpMode(!signUpMode);
-        setError(null);
+        setErrMsg(null);
     };
 
     const handleChange = (e) => {
@@ -29,36 +36,57 @@ function LoginFormPageComponent() {
         signUpMode ? register() : login();
     };
 
-    const login = () => {
-        request("POST", "/login", formData)
-            .then(response => {
-                setAuthHeader(response.data.token);
-                setError(null);
-                navigate('/home'); // Navigate after successful login
-            })
-            .catch(error => {
-                setAuthHeader(null);
-                setError("Invalid username or password");
-            });
-    };
-
-    const register = () => {
-        if (!formData.username || !formData.email || !formData.password) {
-            setError("Please fill in all fields");
-            return;
+    const login = async () => {
+        try {
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({ username: formData.username, password: formData.password}),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            setAuth(response?.data);
+            setFormData({ username: '', email: '', password: '' })
+            alert("Login Succes")
+            navigate(from, { replace: true });
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                console.log(err)
+            }
         }
-        request("POST", "/register", formData)
-            .then(response => {
-                setAuthHeader(response.data.token);
-                setError(null);
-                navigate('/home');
-            })
-            .catch(error => {
-                setAuthHeader(null);
-                setError("Registration failed");
-            });
-    };
+    }
 
+    const register = async () => {
+        try {
+            const response = await axios.post(REGISTER_URL,
+                JSON.stringify({ username:formData.username,password:formData.password ,email:formData.email}),
+                {
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+            console.log(JSON.stringify(response));
+            setFormData({ username: '', email: '', password: '' });
+            alert("Register Succes")
+            navigate(LOGIN_URL, { replace: true });
+            setSignUpMode(false);
+        } catch (err) {
+            console.log(err)
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 409) {
+                setErrMsg('Username Taken');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+        }
+    }
 
     return (
         <div className="body-register">
@@ -70,11 +98,11 @@ function LoginFormPageComponent() {
                                 <h2 className="title">Sign in</h2>
                                 <div className="error">{error}</div>
                                 <div className="input-field">
-                                <FontAwesomeIcon icon={faUser} className="icon-user" />
+                                    <FontAwesomeIcon icon={faUser} className="icon-user" />
                                     <input type="text" name="username" placeholder="Username" onChange={handleChange} />
                                 </div>
                                 <div className="input-field">
-                                <FontAwesomeIcon icon={faLock} className="icon-lock"  />
+                                    <FontAwesomeIcon icon={faLock} className="icon-lock" />
                                     <input type="password" name="password" placeholder="Password" onChange={handleChange} />
                                 </div>
                                 <button type="submit" className="btn">Sign in</button>
@@ -84,15 +112,15 @@ function LoginFormPageComponent() {
                                 <h2 className="title">Sign up</h2>
                                 <div className="error">{error}</div>
                                 <div className="input-field">
-                                <FontAwesomeIcon icon={faUser} className="icon-user" />
+                                    <FontAwesomeIcon icon={faUser} className="icon-user" />
                                     <input type="text" name="username" placeholder="Username" onChange={handleChange} />
                                 </div>
                                 <div className="input-field">
-                                <FontAwesomeIcon icon={faEnvelope} className="icon-envolpe" />
+                                    <FontAwesomeIcon icon={faEnvelope} className="icon-envolpe" />
                                     <input type="text" name="email" placeholder="Email" onChange={handleChange} />
                                 </div>
                                 <div className="input-field">
-                                <FontAwesomeIcon icon={faLock} className="icon-lock"  />
+                                    <FontAwesomeIcon icon={faLock} className="icon-lock" />
                                     <input type="password" name="password" placeholder="Password" onChange={handleChange} />
                                 </div>
                                 <button type="submit" className="btn">Sign up</button>
@@ -120,8 +148,8 @@ function LoginFormPageComponent() {
                     </div>
                 </header>
             </div>
-            </div>
-        );
-    }
+        </div>
+    );
+}
 
 export default LoginFormPageComponent;
