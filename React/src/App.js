@@ -6,6 +6,7 @@ import Post from 'components/Post.js';
 import CommunityPostComponent from 'components/CommunityPostComponent.js';
 import ProfilePageComponent from "./components/ProfilePageComponent.js";
 import CreateCommunityComponent from "./components/CreateCommunityComponent.js";
+import CommunityComponent from 'components/CommunityComponent.js';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route path="/community/create" element={<CreateCommunityComponent />} />
       <Route path="/profile" element={<ProfilePageComponent />} />
       <Route path="/communitypost" element={<CommunityPostComponent />} />
+      <Route path="/communityinfo" element={<CommunityComponent />} />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
 

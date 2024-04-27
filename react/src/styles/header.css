@@ -98,6 +98,7 @@
 .header .row .header-content .nav-group ul li a {
   font-size: var(--fs24);
   color: var(--whiteColor);
+  cursor: pointer;
 }
 
 .header .row .header-content .nav-group ul li a:hover {
