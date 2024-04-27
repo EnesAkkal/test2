@@ -1,6 +1,4 @@
 package com.enesakkal.communityapp.models.community;
-
-
 import com.enesakkal.communityapp.models.post.Post;
 import com.enesakkal.communityapp.models.user.User;
 import lombok.AllArgsConstructor;
@@ -15,15 +13,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Data  // this is from lombok, this reduces the usage of getter/setter consturctors and initializations
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "communities")
+@Document(collection = "communities") // this is going to be our table name 
 
 public class Community {
 
-    @Id
+    @Id // our id will be unique.
     private String _id;
+    
     private String name;
     private String description;
     private boolean isPrivate;

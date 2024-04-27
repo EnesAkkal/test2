@@ -50,8 +50,9 @@ public class CommunityController {
     }
 
     @PostMapping("/create")
+    //@RequestBody takes this JSON data and converts it into a CreateCommunityDto object.
     public ResponseEntity<Community> createCommunity(@RequestBody @Valid CreateCommunityDto community) {
-
+    //Response entity is used for if the request was successful or if there was an error, among other outcomes. ex:http ->404 not found
         User owner = userService.getUserById(community.getOwnerId());
 
         Community newCommunity = new Community();

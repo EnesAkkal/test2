@@ -1,11 +1,9 @@
 package com.enesakkal.communityapp.services;
-
 import com.enesakkal.communityapp.models.post.Post;
 import com.enesakkal.communityapp.models.post.Template;
 import com.enesakkal.communityapp.repositories.PostRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

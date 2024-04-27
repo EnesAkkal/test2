@@ -24,7 +24,7 @@ function HeaderComponent() {
   }
 
   const communityCreate = () =>   {
-    window.location.href = '/community';
+    window.location.href = '/community/create';
   }
 
 
@@ -48,7 +48,7 @@ function HeaderComponent() {
                         <a href="#"><FontAwesomeIcon icon={faBell} title="Notifications" /></a>
                       </li>
                       <li>
-                      <a  class="createCommunity"> <FontAwesomeIcon icon={faUsers}/></a>
+                      <a  class="createCommunity"> <FontAwesomeIcon icon={faUsers} onClick={communityCreate}/></a>
                       </li>
                       <li>
                         <a href="#"><FontAwesomeIcon icon={faPlusSquare} onClick={createPost} /></a>

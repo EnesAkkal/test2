@@ -11,17 +11,18 @@ import CreateCommunityComponent from "./components/CreateCommunityComponent.js";
 function App() {
   return (
     <Routes>
-      
-      <Route path="/" element={<HomePageComponent />} />
+         <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/home" element={<HomePageComponent />} />
       <Route path="/login" element={<LoginFormPageComponent />} />
       <Route path="/user/:activepage" element={<UserProfile />} />
       <Route path="/createpost" element={<Post />} />
       <Route path="/community/create" element={<CreateCommunityComponent />} />
       <Route path="/profile" element={<ProfilePageComponent />} />
-      <Route path='/communitypost' element={<CommunityPostComponent />} />
-      <Route path="*" element={<Navigate to={"/login"} />} />
+      <Route path="/communitypost" element={<CommunityPostComponent />} />
+      <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
+
+    
   );
 }
 

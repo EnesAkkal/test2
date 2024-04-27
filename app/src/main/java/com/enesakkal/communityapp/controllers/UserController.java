@@ -2,7 +2,6 @@ package com.enesakkal.communityapp.controllers;
 
 import com.enesakkal.communityapp.models.user.User;
 import com.enesakkal.communityapp.services.UserService;
-import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
