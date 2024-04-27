@@ -2,7 +2,7 @@ import { Component } from "react";
 import "../styles/homepage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faComment,
+  faPlus,
   faArrowRight,
   faUserLarge,
 } from "@fortawesome/free-solid-svg-icons";
@@ -32,15 +32,17 @@ class HomePageComponent extends Component {
                 <section className="left">
                   <h2>Recommended communities for you</h2>
                   <div className="posts_head">
-                    <div className="posts_topic">Community Name</div>
+                    
+                    <div className="posts_topic">Community Name </div>
                     <div className="posts_category">Tags</div>
                     <div className="posts_replies"> Posts</div>
-                    <div className="posts_views"> Comments</div>
-                    <div className="posts_posts">Views</div>
+                    <div className="posts_views"> Members</div>
+                    <div className="posts_posts">Join</div>
                   </div>
                   <div className="inner-left">
                     <div className="posts_head1">
                       <div className="posts_topic">
+                     
                         <h3>Eco Explorers</h3>
                       </div>
                       <div className="posts_category">
@@ -48,7 +50,7 @@ class HomePageComponent extends Component {
                       </div>
                       <div className="posts_replies">77</div>
                       <div className="posts_views">1500</div>
-                      <div className="posts_posts">4000</div>
+                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
                     </div>
                     <div className="posts_head1">
                       <div className="posts_topic">
@@ -59,7 +61,7 @@ class HomePageComponent extends Component {
                       </div>
                       <div className="posts_replies">77</div>
                       <div className="posts_views">1500</div>
-                      <div className="posts_posts">4000</div>
+                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /> </div>
                     </div>
                     <div className="posts_head1">
                       <div className="posts_topic">
@@ -70,7 +72,7 @@ class HomePageComponent extends Component {
                       </div>
                       <div className="posts_replies">77</div>
                       <div className="posts_views">1500</div>
-                      <div className="posts_posts">4000</div>
+                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
                     </div>
                     <div className="posts_head1">
                       <div className="posts_topic">
@@ -81,7 +83,7 @@ class HomePageComponent extends Component {
                       </div>
                       <div className="posts_replies">77</div>
                       <div className="posts_views">1500</div>
-                      <div className="posts_posts">4000</div>
+                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
                     </div>
                     <div className="posts_head1">
                       <div className="posts_topic">
@@ -92,7 +94,7 @@ class HomePageComponent extends Component {
                       </div>
                       <div className="posts_replies">77</div>
                       <div className="posts_views">1500</div>
-                      <div className="posts_posts">4000</div>
+                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
                     </div>
                   </div>
                 </section>

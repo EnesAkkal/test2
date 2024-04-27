@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/AccountSettings.css";
-import HeaderComponent from "./HeaderComponent.js";
 
 const AccountSettings = () => {
   return (

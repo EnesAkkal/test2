@@ -7,10 +7,12 @@ function Post() {
   return (
     <>
     <HeaderComponent/>
-    <div class ="root">
-    <div class="post-container">
-      <div class="column">
-        <h2>Create New Topic</h2>
+    <div className ="root">
+    <div className="post-container">
+      <div className="column">
+      <div className="title">
+            <h2>Create New Post</h2>
+            </div>
         <form className="form">
           <label for="fname">Title</label>
           <textarea id="description" name="description" rows="1"></textarea>
@@ -18,15 +20,15 @@ function Post() {
           <label for="lname">Tags</label>
           <textarea id="description" name="description" rows="1"></textarea>
 
-            <div class="flex-row">
+            <div className="flex-row">
               <label for="file-upload">Select a photo to upload:</label>
               <input type="file" id="file-upload" name="file-upload" />
             </div>
-            <div class="flex-row">
+            <div className="flex-row">
               <label for="description">Description of the photo (optional):</label>
               <textarea id="description" name="description" rows="2"></textarea>
             </div>
-          <div class="flex-row">
+          <div className="flex-row">
             <label for="improvements">
              Content
             </label>

@@ -213,6 +213,11 @@ footer {
     padding-right: 40px;
   }
 
+  .posts_posts{
+    
+    
+  }
+
   .posts_head1{
     display: flex;
     justify-content: space-between; 
@@ -377,10 +382,19 @@ main {
   }
 }
 
-main .left h2 {
+  main .left h2 {
     margin-bottom: 2.7rem;
     font-size: var(--fs24);
     color: var(--lightBlackColor);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 20px;
+    background-color: var(--whiteColor);
+    border-radius: 0.7rem;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
+      0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
+      padding: 8px;
   }
   
   main .left .inner-left .box {

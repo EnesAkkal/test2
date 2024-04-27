@@ -29,37 +29,37 @@ function HeaderComponent() {
 
 
   return (
-    <header class="header" id="header">
-            <div class="row">
-              <div class="homefeed-container">
-                <div class="header-content">
-                  <div class="home">
+    <header className="header" id="header">
+            <div className="row">
+              <div className="homefeed-container">
+                <div className="header-content">
+                  <div className="home">
                     <a onClick={home}> <FontAwesomeIcon icon={faHome}  className='home' /> </a>
                   </div>
-                  <div class="nav-search">
-                    <div class="form-group">
+                  <div className="nav-search">
+                    <div className="form-group">
                       <input type="text" placeholder="Search For Communities"  />
                       <FontAwesomeIcon icon={faMagnifyingGlass} className="icon-search" />
                     </div>
                   </div>
-                  <div class="nav-group">
+                  <div className="nav-group">
                     <ul>
                       <li>
                         <a href="#"><FontAwesomeIcon icon={faBell} title="Notifications" /></a>
                       </li>
                       <li>
-                      <a  class="createCommunity"> <FontAwesomeIcon icon={faUsers} onClick={communityCreate}/></a>
+                      <a  className="createCommunity"> <FontAwesomeIcon icon={faUsers} onClick={communityCreate}/></a>
                       </li>
                       <li>
                         <a href="#"><FontAwesomeIcon icon={faPlusSquare} onClick={createPost} /></a>
                       </li>
-                      <li class="join">
+                      <li className="join">
                         <a href="#">
                         <FontAwesomeIcon icon={faUser} onClick={profile} />
                         </a>
                       </li>
                       <li>
-                        <a  class="logout"> <FontAwesomeIcon icon={faSignOut} onClick={handleLogout}/></a>
+                        <a  className="logout"> <FontAwesomeIcon icon={faSignOut} onClick={handleLogout}/></a>
                       </li>
                       <li>
                         <a href="#"><FontAwesomeIcon icon={faEllipsisVertical} /></a>

@@ -4,7 +4,7 @@ import '../styles/footer.css';
 function FooterComponent() {
   return (
     <footer>
-    <div class="homefeed-container">
+    <div className="homefeed-container">
       <ul>
         <li><a href="#">home</a></li>
         <li><a href="#">about us</a></li>

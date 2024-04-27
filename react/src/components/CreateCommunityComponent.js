@@ -45,10 +45,12 @@ function CreateCommunityComponent() {
   return (
     <div>
       <HeaderComponent />
-      <div class="root">
-        <div class="post-container">
-          <div class="column">
+      <div className="root">
+        <div className="post-container">
+          <div className="column">
+            <div className="title">
             <h2>Create New Community</h2>
+            </div>
             <form className="form">
               <label for="fname">Name</label>
               <textarea id="description" name="description" rows="1"></textarea>
@@ -56,7 +58,7 @@ function CreateCommunityComponent() {
               <label for="lname">Tags</label>
               <textarea id="description" name="description" rows="1"></textarea>
 
-              <div class="flex-row">
+              <div className="flex-row">
                 <label>
                   <input
                     type="checkbox"
@@ -67,7 +69,7 @@ function CreateCommunityComponent() {
                   <span>Private</span>
                 </label>
               </div>
-              <div class="flex-row">
+              <div className="flex-row">
                 <label for="improvements">Description</label>
                 <textarea
                   id="improvements"
