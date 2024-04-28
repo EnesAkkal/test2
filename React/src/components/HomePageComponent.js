@@ -1,16 +1,9 @@
 import { Component } from "react";
 import "../styles/homepage.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlus,
-  faArrowRight,
-  faUserLarge,
-} from "@fortawesome/free-solid-svg-icons";
-import { faEye } from "@fortawesome/free-regular-svg-icons";
-import pp1 from "../assets/pp1.jpg";
-import pp2 from "../assets/pp2.png";
 import FooterComponent from "./FooterComponent.js";
 import HeaderComponent from "./HeaderComponent.js";
+import CommunityTableElement from "./CommunityTableElement.js";
+import axios from "../api/axios.js";
 
 class HomePageComponent extends Component {
   constructor(props) {
@@ -19,8 +12,17 @@ class HomePageComponent extends Component {
       formData: { username: "", email: "", password: "" },
       signUpMode: true,
       error: null,
+      communities: [],
     };
   }
+
+    componentDidMount() {
+    axios.get("/community").then((response) => {
+      this.setState({ communities: response.data });
+      console.log(response.data);
+    });
+    }
+
   render() {
     return (
       <div>
@@ -39,62 +41,10 @@ class HomePageComponent extends Component {
                     <div className="posts_posts">Join</div>
                   </div>
                   <div className="inner-left">
-                    <div className="posts_head1">
-                      <div className="posts_topic">
-                     
-                        <h3>Eco Explorers</h3>
-                      </div>
-                      <div className="posts_category">
-                        <p>Sustainability</p>
-                      </div>
-                      <div className="posts_replies">77</div>
-                      <div className="posts_views">1500</div>
-                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
-                    </div>
-                    <div className="posts_head1">
-                      <div className="posts_topic">
-                        <h3>Code Crew</h3>
-                      </div>
-                      <div className="posts_category">
-                        <p>Programming</p>
-                      </div>
-                      <div className="posts_replies">77</div>
-                      <div className="posts_views">1500</div>
-                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /> </div>
-                    </div>
-                    <div className="posts_head1">
-                      <div className="posts_topic">
-                        <h3>Fashion Lovers</h3>
-                      </div>
-                      <div className="posts_category">
-                        <p>Fashions</p>
-                      </div>
-                      <div className="posts_replies">77</div>
-                      <div className="posts_views">1500</div>
-                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
-                    </div>
-                    <div className="posts_head1">
-                      <div className="posts_topic">
-                        <h3>Pet Pals</h3>
-                      </div>
-                      <div className="posts_category">
-                        <p>Animals</p>
-                      </div>
-                      <div className="posts_replies">77</div>
-                      <div className="posts_views">1500</div>
-                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
-                    </div>
-                    <div className="posts_head1">
-                      <div className="posts_topic">
-                        <h3>Time Travelers</h3>
-                      </div>
-                      <div className="posts_category">
-                        <p>History</p>
-                      </div>
-                      <div className="posts_replies">77</div>
-                      <div className="posts_views">1500</div>
-                      <div className="posts_posts"><FontAwesomeIcon icon={faPlus} /></div>
-                    </div>
+                    {this.state.communities.map((community, index) => {
+                      return <CommunityTableElement key={index} community={community} />
+                    })}
+
                   </div>
                 </section>
               </div>

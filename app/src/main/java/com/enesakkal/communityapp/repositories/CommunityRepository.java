@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface CommunityRepository extends MongoRepository<Community, ObjectId>{
+public interface CommunityRepository extends MongoRepository<Community, String>{
     Boolean existsByDescription(String description);
     Boolean existsByCreatedAt(Date createdAt);
     Boolean existsByLastModifiedDate(Date lastModifiedDate);

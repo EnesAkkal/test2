@@ -1,75 +1,75 @@
-import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOut, faUser, faEllipsisVertical, faMagnifyingGlass, faUsers, faComment as faCommentRegular, faEye as faEyeRegular, faUserLarge, faSign, faHome } from '@fortawesome/free-solid-svg-icons';
-import { faBell, faPlusSquare} from '@fortawesome/free-regular-svg-icons';
+import { faBell, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import '../styles/header.css';
 
+import { Navigate, useNavigate } from 'react-router-dom';
 function HeaderComponent() {
 
   const handleLogout = () => {
     localStorage.removeItem('auth');
-    window.location.href = '/';
+    window.location.href = '/login';
   }
 
-  const createPost = () =>   {
+  const createPost = () => {
     window.location.href = '/createpost';
   }
 
-  const profile = () =>   {
-    window.location.href = '/user/accountsettings';
+  const profile = () => {
+    window.location.href = '/user/accountsettings'
   }
 
-  const home = () =>   {
+  const home = () => {
     window.location.href = '/home';
   }
 
-  const communityCreate = () =>   {
-    window.location.href = '/community/create';
+  const communityCreate = () => {
+    window.location.href = '/community/createpage';
   }
 
 
   return (
     <header className="header" id="header">
-            <div className="row">
-              <div className="homefeed-container">
-                <div className="header-content">
-                  <div className="home">
-                    <a onClick={home}> <FontAwesomeIcon icon={faHome}  className='home' /> </a>
-                  </div>
-                  <div className="nav-search">
-                    <div className="form-group">
-                      <input type="text" placeholder="Search For Communities"  />
-                      <FontAwesomeIcon icon={faMagnifyingGlass} className="icon-search" />
-                    </div>
-                  </div>
-                  <div className="nav-group">
-                    <ul>
-                      <li>
-                        <a href="#"><FontAwesomeIcon icon={faBell} title="Notifications" /></a>
-                      </li>
-                      <li>
-                      <a  className="createCommunity"> <FontAwesomeIcon icon={faUsers} onClick={communityCreate}/></a>
-                      </li>
-                      <li>
-                        <a href="#"><FontAwesomeIcon icon={faPlusSquare} onClick={createPost} /></a>
-                      </li>
-                      <li className="join">
-                        <a href="#">
-                        <FontAwesomeIcon icon={faUser} onClick={profile} />
-                        </a>
-                      </li>
-                      <li>
-                        <a  className="logout"> <FontAwesomeIcon icon={faSignOut} onClick={handleLogout}/></a>
-                      </li>
-                      <li>
-                        <a href="#"><FontAwesomeIcon icon={faEllipsisVertical} /></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+      <div className="row">
+        <div className="homefeed-container">
+          <div className="header-content">
+            <div className="home">
+              <a onClick={home}> <FontAwesomeIcon icon={faHome} className='home' /> </a>
+            </div>
+            <div className="nav-search">
+              <div className="form-group">
+                <input type="text" placeholder="Search For Communities" />
+                <FontAwesomeIcon icon={faMagnifyingGlass} className="icon-search" />
               </div>
             </div>
-          </header>
+            <div className="nav-group">
+              <ul>
+                <li>
+                  <a href="#"><FontAwesomeIcon icon={faBell} title="Notifications" /></a>
+                </li>
+                <li>
+                  <a className="createCommunity"> <FontAwesomeIcon icon={faUsers} onClick={communityCreate} /></a>
+                </li>
+                <li>
+                  <a href="#"><FontAwesomeIcon icon={faPlusSquare} onClick={createPost} /></a>
+                </li>
+                <li className="join">
+                  <a href="#">
+                    <FontAwesomeIcon icon={faUser} onClick={profile} />
+                  </a>
+                </li>
+                <li>
+                  <a className="logout"> <FontAwesomeIcon icon={faSignOut} onClick={handleLogout} /></a>
+                </li>
+                <li>
+                  <a href="#"><FontAwesomeIcon icon={faEllipsisVertical} /></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
   )
 }
 

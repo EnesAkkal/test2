@@ -13,7 +13,7 @@ import java.util.List;
 public class Template {
 
     @Id
-    private ObjectId _id;
+    private String _id;
     private String title;
     private String body;
     private List<String> tags;

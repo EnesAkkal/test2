@@ -4,7 +4,6 @@ import com.enesakkal.communityapp.models.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -37,5 +36,6 @@ public class Community {
     private List<User> members;
     private List<User> bannedUsers;
     private List<Post> posts;
+    private List<String> tags;
 
 }

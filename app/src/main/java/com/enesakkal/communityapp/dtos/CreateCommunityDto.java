@@ -7,5 +7,6 @@ public class CreateCommunityDto {
     private String description;
     private boolean isPrivate;
     private String ownerId;
+    private String[] tags;
 
 }

@@ -15,7 +15,7 @@ public class TemplateService {
         this.repository = repository;
     }
 
-    public Template getTemplateById(ObjectId id, ObjectId postId) {
+    public Template getTemplateById(String id, String postId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             // Find and remove the template with the given templateId
@@ -31,7 +31,7 @@ public class TemplateService {
     }
 
 
-    public void deleteTemplate(ObjectId postId, ObjectId templateId) {
+    public void deleteTemplate(String postId, ObjectId templateId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             // Find and remove the template with the given templateId
@@ -46,7 +46,7 @@ public class TemplateService {
         }
     }
 
-    public void addTemplate(ObjectId postId, Template template) {
+    public void addTemplate(String postId, Template template) {
         Post post = repository.findById(postId)
                 .orElse(null);
         if (post != null) {
@@ -61,7 +61,7 @@ public class TemplateService {
         }
     }
 
-    public void updateTemplate(ObjectId postId, ObjectId templateId, Template template) {
+    public void updateTemplate(String postId, String templateId, Template template) {
         Post post = repository.findById(postId)
                 .orElse(null);
         if (post != null) {
@@ -82,7 +82,7 @@ public class TemplateService {
         }
     }
 
-    public void deleteAllTemplates(ObjectId postId) {
+    public void deleteAllTemplates(String postId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             post.getTemplates().clear();
@@ -92,7 +92,7 @@ public class TemplateService {
         }
     }
 
-    public List<Template> getAllTemplates(ObjectId postId) {
+    public List<Template> getAllTemplates(String postId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             return post.getTemplates();
@@ -101,7 +101,7 @@ public class TemplateService {
         }
     }
 
-    public List<String> getTags(ObjectId postId, ObjectId templateId) {
+    public List<String> getTags(String postId, String templateId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             return post.getTemplates().stream()
@@ -113,7 +113,7 @@ public class TemplateService {
         }
     }
 
-    public void addTag(ObjectId postId, ObjectId templateId, String tag) {
+    public void addTag(String postId, String templateId, String tag) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             post.getTemplates().stream()
@@ -126,7 +126,7 @@ public class TemplateService {
         }
     }
 
-    public void deleteTag(ObjectId postId, ObjectId templateId, String tag) {
+    public void deleteTag(String postId, String templateId, String tag) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             post.getTemplates().stream()
@@ -139,7 +139,7 @@ public class TemplateService {
         }
     }
 
-    public void deleteAllTags(ObjectId postId, ObjectId templateId) {
+    public void deleteAllTags(String postId, String templateId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             post.getTemplates().stream()

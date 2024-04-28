@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PostRepository extends MongoRepository<Post, ObjectId> {
+public interface PostRepository extends MongoRepository<Post, String> {
     Optional<Post> findByTitle(String title);
     Optional<Post> findByBody(String body);
     Optional<Post> findByTemplates(List<Template> templates);
@@ -22,5 +22,9 @@ public interface PostRepository extends MongoRepository<Post, ObjectId> {
     Boolean existsByTemplates(List<Template> templates);
     Boolean existsByCreatedAt(Date createdAt);
     Boolean existsByLastModifiedDate(Date lastModifiedDate);
+
+    List<Post> findAllByCommunityId(String communityId);
+
+    Optional<Post> findBy_id(String id);
 
 }

@@ -1,10 +1,8 @@
 package com.enesakkal.communityapp.repositories;
-
 import com.enesakkal.communityapp.models.user.User;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository

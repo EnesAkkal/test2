@@ -45,10 +45,11 @@ function LoginFormPageComponent() {
                     withCredentials: true
                 }
             );
+            console.log(response);
             console.log(JSON.stringify(response?.data));
             setAuth(response?.data);
             setFormData({ username: '', email: '', password: '' })
-            alert("Login Succes")
+            alert("Login Success")
             navigate(from, { replace: true });
         } catch (err) {
             if (!err?.response) {

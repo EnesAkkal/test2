@@ -3,7 +3,6 @@ package com.enesakkal.communityapp.services;
 import com.enesakkal.communityapp.models.post.Comment;
 import com.enesakkal.communityapp.models.post.Post;
 import com.enesakkal.communityapp.repositories.PostRepository;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +14,7 @@ public class CommentService {
         this.repository = repository;
     }
 
-    public void addComment(ObjectId postId, Comment comment) {
+    public void addComment(String postId, Comment comment) {
         Post post = repository.findById(postId)
                 .orElse(null);
         if (post != null) {
@@ -30,7 +29,7 @@ public class CommentService {
         }
     }
 
-    public void deleteComment(ObjectId postId, ObjectId commentId) {
+    public void deleteComment(String postId, String commentId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             // Find and remove the comment with the given commentId
@@ -45,7 +44,7 @@ public class CommentService {
         }
     }
 
-    public Comment getCommentById(ObjectId id, ObjectId postId) {
+    public Comment getCommentById(String id, String postId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             // Find and remove the comment with the given commentId

@@ -12,7 +12,7 @@ import java.util.Date;
 public class Comment {
 
     @Id
-    private ObjectId _id;
+    private String _id;
     private String body;
     private int upVotes;
     private int downVotes;

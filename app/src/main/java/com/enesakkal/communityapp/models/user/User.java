@@ -29,8 +29,8 @@ public class User {
     private Date registeredAt;
     private List<Post> posts;
     private List<Comment> comments;
-    private List<ObjectId> followedCommunities;
-    private List<ObjectId> createdCommunities;
+    private List<String> followedCommunities;
+    private List<String> createdCommunities;
     @CreatedDate
     private Date createdAt;
     @LastModifiedDate

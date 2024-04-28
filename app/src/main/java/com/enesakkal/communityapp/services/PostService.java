@@ -18,11 +18,11 @@ public class PostService {
         this.repository = repository;
     }
 
-    public String getPostById(ObjectId id) {
+    public String getPostById(String id) {
         return repository.findById(id).orElseThrow().getTitle();
     }
 
-    public void deletePostById(ObjectId id) {
+    public void deletePostById(String id) {
         repository.deleteById(id);
     }
 
@@ -50,11 +50,11 @@ public class PostService {
         return repository.save(post);
     }
 
-    public List<Comment> getComments(ObjectId id) {
+    public List<Comment> getComments(String id) {
         return repository.findById(id).orElseThrow().getComments();
     }
 
-    public List<Template> getTemplates(ObjectId id) {
+    public List<Template> getTemplates(String id) {
         return repository.findById(id).orElseThrow().getTemplates();
     }
     // Read operation
@@ -62,7 +62,7 @@ public class PostService {
         return repository.findAll();
     }
 
-    public Post updatePost(ObjectId id, Post post) {
+    public Post updatePost(String id, Post post) {
         Post existingPost = repository.findById(id).orElseThrow();
         existingPost.setTitle(post.getTitle());
         existingPost.setBody(post.getBody());

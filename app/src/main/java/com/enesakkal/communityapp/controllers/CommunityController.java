@@ -10,7 +10,6 @@ import com.enesakkal.communityapp.services.PostService;
 import com.enesakkal.communityapp.services.TemplateService;
 import com.enesakkal.communityapp.services.UserService;
 import jakarta.validation.Valid;
-import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +44,7 @@ public class CommunityController {
     }
 
     @GetMapping("/posts/{id}")
-    public ResponseEntity<List<Template>> getTemplates(@PathVariable ObjectId id) {
+    public ResponseEntity<List<Template>> getTemplates(@PathVariable String id) {
         return ResponseEntity.ok(templateService.getAllTemplates(id));
     }
 
@@ -60,7 +59,14 @@ public class CommunityController {
         newCommunity.setDescription(community.getDescription());
         newCommunity.setPrivate(community.isPrivate());
         newCommunity.setOwner(owner);
+        newCommunity.setTags(List.of(community.getTags()));
         return ResponseEntity.ok(communityService.createCommunity(newCommunity));
+    }
+
+    @PostMapping("/join/{communityId}")
+    public ResponseEntity<Community> joinCommunity(@RequestBody String userId, @PathVariable String communityId) {
+
+        return ResponseEntity.ok(communityService.joinCommunity(userId, communityId));
     }
 
 }

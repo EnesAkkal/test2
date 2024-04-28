@@ -7,24 +7,29 @@ import CommunityPostComponent from 'components/CommunityPostComponent.js';
 import ProfilePageComponent from "./components/ProfilePageComponent.js";
 import CreateCommunityComponent from "./components/CreateCommunityComponent.js";
 import CommunityComponent from 'components/CommunityComponent.js';
+import RequireAuth from "./components/ReqiureAuth.js";
 
 
 function App() {
   return (
     <Routes>
-         <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/home" element={<HomePageComponent />} />
       <Route path="/login" element={<LoginFormPageComponent />} />
-      <Route path="/user/:activepage" element={<UserProfile />} />
-      <Route path="/createpost" element={<Post />} />
-      <Route path="/community/create" element={<CreateCommunityComponent />} />
-      <Route path="/profile" element={<ProfilePageComponent />} />
-      <Route path="/communitypost" element={<CommunityPostComponent />} />
-      <Route path="/communityinfo" element={<CommunityComponent />} />
+      <Route element={<RequireAuth />} >
+        <Route path="/" element={<HomePageComponent />} />y
+        <Route path="/home" element={<HomePageComponent />} />y
+
+        <Route path="/user/:activepage" element={<UserProfile />} />
+        <Route path="/createpost" element={<Post />} />
+        <Route path="/community/createpage" element={<CreateCommunityComponent />} />
+        <Route path="/profile" element={<ProfilePageComponent />} />
+        <Route path="/communitypost" element={<CommunityPostComponent />} />
+        <Route path="/communityinfo" element={<CommunityComponent />} />
+      </Route>
+
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
 
-    
+
   );
 }
 

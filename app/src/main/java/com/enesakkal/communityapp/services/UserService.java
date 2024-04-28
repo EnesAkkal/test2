@@ -1,5 +1,6 @@
 package com.enesakkal.communityapp.services;
 
+import com.enesakkal.communityapp.models.community.Community;
 import com.enesakkal.communityapp.models.user.User;
 import com.enesakkal.communityapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -10,8 +11,11 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository repository;
-    public UserService(UserRepository repository) {
+
+    private final CommunityService communityService;
+    public UserService(UserRepository repository, CommunityService communityService) {
         this.repository = repository;
+        this.communityService = communityService;
     }
 
     public User getUserById(String id) {
@@ -53,4 +57,5 @@ public class UserService {
     public boolean existsByUsername(String username) {
         return repository.existsByUsername(username);
     }
+
 }
