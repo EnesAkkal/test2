@@ -1,5 +1,4 @@
 package com.enesakkal.communityapp.services;
-
 import com.enesakkal.communityapp.models.community.Community;
 import com.enesakkal.communityapp.models.user.User;
 import com.enesakkal.communityapp.repositories.CommunityRepository;

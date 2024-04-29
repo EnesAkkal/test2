@@ -36,8 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 /node_modules/.bin
-react/package-lock.json
-react/package.json
 react/src/assets/pp1.jpg
 react/src/assets/pp2.png
 node_modules/.package-lock.json

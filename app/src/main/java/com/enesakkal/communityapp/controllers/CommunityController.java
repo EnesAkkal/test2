@@ -1,5 +1,4 @@
 package com.enesakkal.communityapp.controllers;
-
 import com.enesakkal.communityapp.dtos.CreateCommunityDto;
 import com.enesakkal.communityapp.models.community.Community;
 import com.enesakkal.communityapp.models.post.Post;
@@ -43,6 +42,7 @@ public class CommunityController {
         return ResponseEntity.ok(postService.getAllPosts());
     }
 
+    // Tek bir ID istediğimiz için {id} şeklinde yazmamız gerekiyor.
     @GetMapping("/posts/{id}")
     public ResponseEntity<List<Template>> getTemplates(@PathVariable String id) {
         return ResponseEntity.ok(templateService.getAllTemplates(id));
