@@ -29,6 +29,7 @@ const UserProfile = () => {
             {activepage === "changepassword" && <ChangePassword />}
             {activepage === "changemail" && <ChangeMail />}
             {activepage === "changenickname" && <ChangeNickname />}
+            
           </div>
         </div>
       </div>

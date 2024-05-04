@@ -8,6 +8,8 @@ import ProfilePageComponent from "./components/ProfilePageComponent.js";
 import CreateCommunityComponent from "./components/CreateCommunityComponent.js";
 import CommunityComponent from 'components/CommunityComponent.js';
 import RequireAuth from "./components/ReqiureAuth.js";
+import ManageCommunity from './components/ManageCommunity.js';
+
 
 
 function App() {
@@ -15,17 +17,16 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginFormPageComponent />} />
       <Route element={<RequireAuth />} >
-        <Route path="/" element={<LoginFormPageComponent />} />y
-        <Route path="/home" element={<HomePageComponent />} />y
-
+        <Route path="/" element={<HomePageComponent />} />
+        <Route path="/home" element={<HomePageComponent />} />
         <Route path="/user/:activepage" element={<UserProfile />} />
         <Route path="/createpost" element={<Post />} />
         <Route path="/community/createpage" element={<CreateCommunityComponent />} />
         <Route path="/profile" element={<ProfilePageComponent />} />
         <Route path="/communitypost" element={<CommunityPostComponent />} />
-        <Route path="/communityinfo" element={<CommunityComponent />} />
+        <Route path="/community" element={<CommunityComponent />} />
+        <Route path="/community/settings/:activepage" element={<ManageCommunity />} />
       </Route>
-
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
 

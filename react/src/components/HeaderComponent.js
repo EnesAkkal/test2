@@ -11,10 +11,6 @@ function HeaderComponent() {
     window.location.href = '/login';
   }
 
-  const createPost = () => {
-    window.location.href = '/createpost';
-  }
-
   const profile = () => {
     window.location.href = '/user/accountsettings'
   }
@@ -33,9 +29,6 @@ function HeaderComponent() {
       <div className="row">
         <div className="homefeed-container">
           <div className="header-content">
-            <div className="home">
-              <a onClick={home}> <FontAwesomeIcon icon={faHome} className='home' /> </a>
-            </div>
             <div className="nav-search">
               <div className="form-group">
                 <input type="text" placeholder="Search For Communities" />
@@ -44,14 +37,14 @@ function HeaderComponent() {
             </div>
             <div className="nav-group">
               <ul>
+              <div className="home">
+              <a onClick={home}> <FontAwesomeIcon icon={faHome} className='home' /> </a>
+            </div>
                 <li>
                   <a href="#"><FontAwesomeIcon icon={faBell} title="Notifications" /></a>
                 </li>
                 <li>
                   <a className="createCommunity"> <FontAwesomeIcon icon={faUsers} onClick={communityCreate} /></a>
-                </li>
-                <li>
-                  <a href="#"><FontAwesomeIcon icon={faPlusSquare} onClick={createPost} /></a>
                 </li>
                 <li className="join">
                   <a href="#">
@@ -61,9 +54,7 @@ function HeaderComponent() {
                 <li>
                   <a className="logout"> <FontAwesomeIcon icon={faSignOut} onClick={handleLogout} /></a>
                 </li>
-                <li>
-                  <a href="#"><FontAwesomeIcon icon={faEllipsisVertical} /></a>
-                </li>
+             
               </ul>
             </div>
           </div>

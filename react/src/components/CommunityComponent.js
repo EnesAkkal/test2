@@ -11,15 +11,21 @@ import {
   faArrowRightFromBracket,
   faSquarePlus
 } from "@fortawesome/free-solid-svg-icons";
-import { faEye } from "@fortawesome/free-regular-svg-icons";
 import pp1 from "../assets/pp1.jpg";
-import pp2 from "../assets/pp2.png";
 import FooterComponent from "./FooterComponent.js";
 import HeaderComponent from "./HeaderComponent.js";
 function CommunityComponent() {
 
   const handleCommunity = () => {
     window.location.href = '/community/createpage';
+  }
+
+  const createPost = () => {
+    window.location.href = '/createpost';
+  }
+
+  const CommunitySettings = () => {
+    window.location.href = '/community/settings/kickuser';
   }
 
   return (
@@ -35,7 +41,6 @@ function CommunityComponent() {
                 </div>
                 <div className="posts">
                   <ul>
-                    <li className="list">12</li>
                     <li>
                       <div className="post-info-area">
                         <p>by CaptainD 3 hours ago</p>
@@ -105,12 +110,12 @@ function CommunityComponent() {
                     </div>
                   </div>
                   <div className="buttons">
-                    <a href="#" className="btn btn-red" onClick={handleCommunity}>
+                    <a href="#" className="btn btn-red" onClick={CommunitySettings}>
                     <FontAwesomeIcon icon={faGear} /> Manage Community 
                     </a>
                   </div>
                   <div className="buttons">
-                    <a href="#" className="btn btn-red" onClick={handleCommunity}>
+                    <a href="#" className="btn btn-red" onClick={createPost}>
                     <FontAwesomeIcon icon={faSquarePlus}/> Create Template
                     </a>
                   </div>
