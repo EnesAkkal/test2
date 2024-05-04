@@ -14,10 +14,10 @@ function Post() {
             <h2>Create New Post</h2>
             </div>
         <form className="form">
-          <label for="fname">Title</label>
+          <label for="ftitle">Title</label>
           <textarea id="description" name="description" rows="1"></textarea>
 
-          <label for="lname">Tags</label>
+          <label for="ltags">Tags</label>
           <textarea id="description" name="description" rows="1"></textarea>
 
             <div className="flex-row">

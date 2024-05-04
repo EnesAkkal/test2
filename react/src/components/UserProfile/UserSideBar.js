@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import '../styles/UserSideBar.css';
+import "../../styles/UserSideBar.css";
 
 const UserSideBar = ({ activepage }) => {
   return (
@@ -48,7 +48,7 @@ const UserSideBar = ({ activepage }) => {
       }
 
       {
-        activepage === 'yourorders' ?
+        activepage === 'changemail' ?
           <div className='s2'>
             
             <span>Change Email</span>
@@ -56,7 +56,7 @@ const UserSideBar = ({ activepage }) => {
 
           :
           <Link
-            to='/user/yourorders' className='stylenone'>
+            to='/user/changemail' className='stylenone'>
             <div className='s1'>
              
 
@@ -66,24 +66,7 @@ const UserSideBar = ({ activepage }) => {
       }
 
       {
-        activepage === 'address' ?
-
-          <div className='s2'>
-            
-            <span>Ignored Users</span>
-          </div>
-          :
-          <Link
-            to='/user/address' className='stylenone'>
-            <div className='s1'>
-             
-              <span>Ignored Users</span>
-            </div>
-
-          </Link>
-      }
-      {
-        activepage === 'legalnotice' ?
+        activepage === 'changenickname' ?
 
           <div className='s2'>
             
@@ -93,7 +76,7 @@ const UserSideBar = ({ activepage }) => {
 
           :
           <Link
-            to='/user/legalnotice' className='stylenone'>
+            to='/user/changenickname' className='stylenone'>
             <div className='s1'>
             
 

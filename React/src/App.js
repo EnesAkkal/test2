@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginFormPageComponent from 'components/LoginFormPageComponent.js';
 import HomePageComponent from './components/HomePageComponent.js';
-import UserProfile from 'components/UserProfile.js';
+import UserProfile from 'components/UserProfile/UserProfile.js';
 import Post from 'components/Post.js';
 import CommunityPostComponent from 'components/CommunityPostComponent.js';
 import ProfilePageComponent from "./components/ProfilePageComponent.js";
@@ -15,7 +15,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginFormPageComponent />} />
       <Route element={<RequireAuth />} >
-        <Route path="/" element={<HomePageComponent />} />y
+        <Route path="/" element={<LoginFormPageComponent />} />y
         <Route path="/home" element={<HomePageComponent />} />y
 
         <Route path="/user/:activepage" element={<UserProfile />} />

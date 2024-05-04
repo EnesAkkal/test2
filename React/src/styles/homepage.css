@@ -233,13 +233,11 @@ footer {
 
   .hover-profile-image {
     position: absolute;
-    top: 20px; /* Adjust based on where you want the image to appear */
-    left: 20px; /* Adjust based on where you want the image to appear */
-    z-index: 100; /* Ensure it is on top of other elements */
+    top: 20px; 
+    left: 20px; 
+    z-index: 100; 
   }
   
-  
-  /* You can display the image using a CSS class combination */
   .right .inner-box:hover + .hover-profile-image {
     display: block;
   }
@@ -558,7 +556,7 @@ main {
   }
   
   main .right .top-forums h3,
-  main .right .top-contributors h3,
+  main .right .community-info h3,
   main .right .recommended-communities h3 {
     font-size: var(--fs18);
     font-weight: 700;
@@ -567,7 +565,7 @@ main {
     line-height: 1.6;
   }
   main .right .top-forums > a,
-  main .right .top-contributors > a {
+  main .right .community-info > a {
     display: block;
     font-size: var(--fs14);
     font-weight: 500;
@@ -608,7 +606,7 @@ main {
     font-size: 1.6rem;
   }
   
-  main .right .top-contributors .inner-box,
+  main .right .community-info .inner-box,
   main .right .recommended-communities .inner-box {
     display: flex;
     align-items: center;
@@ -616,32 +614,32 @@ main {
     line-height: 2;
   }
   
-  main .right .top-contributors .inner-box .img,
+  main .right .community-info .inner-box .img,
   main .right .recommended-communities .inner-box .img {
     width: 3.6rem;
     height: 3.6rem;
     overflow: hidden;
   }
   
-  main .right .top-contributors .inner-box .img img,
+  main .right .community-info .inner-box .img img,
   main .right .recommended-communities .inner-box .img img {
    /* border-radius: 15%; */
   }
   
-  main .right .top-contributors .inner-box .details,
+  main .right .community-info .inner-box .details,
   main .right .recommended-communities .inner-box .details {
     display: flex;
     flex-direction: column;
     margin-left: 0.9rem;
   }
   
-  main .right .top-contributors .inner-box .details a,
+  main .right .community-info .inner-box .details a,
   main .right .recommended-communities .inner-box .details a {
     font-weight: 500;
     font-size: 12px;
   }
   
-  main .right .top-contributors .inner-box .details span,
+  main .right .community-info .inner-box .details span,
   main .right .recommended-communities .inner-box .details span {
     font-size: 12px;
     color: var(--darkGrayColor);

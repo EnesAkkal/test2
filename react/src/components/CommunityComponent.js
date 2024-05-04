@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComment,
   faArrowRight,
-  faUserLarge,
+  faGear,
   faThumbsUp,
+  faCalendarPlus,
+  faArrowRightFromBracket,
+  faSquarePlus
 } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import pp1 from "../assets/pp1.jpg";
@@ -14,6 +17,11 @@ import pp2 from "../assets/pp2.png";
 import FooterComponent from "./FooterComponent.js";
 import HeaderComponent from "./HeaderComponent.js";
 function CommunityComponent() {
+
+  const handleCommunity = () => {
+    window.location.href = '/community/createpage';
+  }
+
   return (
     <>
       <HeaderComponent />
@@ -29,6 +37,9 @@ function CommunityComponent() {
                   <ul>
                     <li className="list">12</li>
                     <li>
+                      <div className="post-info-area">
+                        <p>by CaptainD 3 hours ago</p>
+                      </div>
                       <div className="post-title">
                         <h3>
                           {" "}
@@ -36,7 +47,6 @@ function CommunityComponent() {
                           are the “highlights”?
                         </h3>
                       </div>
-
                       <div className="post-content">
                         <p>
                           Lorem Ipsum is simply dummy text of the printing and
@@ -53,17 +63,14 @@ function CommunityComponent() {
                           Lorem Ipsum.
                         </p>
                         <div className="reactions">
-                          <a>
+                        <a>
                             {" "}
-                            100 <FontAwesomeIcon icon={faComment} />
+                            250 <FontAwesomeIcon icon={faThumbsUp} className="icons" />
                           </a>
                           <a>
                             {" "}
-                            250 <FontAwesomeIcon icon={faThumbsUp} />
+                            100 <FontAwesomeIcon icon={faComment} className="icons" />
                           </a>
-                          <div className="post-data">
-                            <p> by user123</p>
-                          </div>
                         </div>
                       </div>
                     </li>
@@ -98,12 +105,39 @@ function CommunityComponent() {
                     </div>
                   </div>
                   <div className="buttons">
-                    <a href="#" className="btn btn-red">
-                      <FontAwesomeIcon icon={faUserLarge} /> Member List
+                    <a href="#" className="btn btn-red" onClick={handleCommunity}>
+                    <FontAwesomeIcon icon={faGear} /> Manage Community 
+                    </a>
+                  </div>
+                  <div className="buttons">
+                    <a href="#" className="btn btn-red" onClick={handleCommunity}>
+                    <FontAwesomeIcon icon={faSquarePlus}/> Create Template
+                    </a>
+                  </div>
+                  <div className="buttons">
+                    <a href="#" className="btn btn-red" onClick={handleCommunity}>
+                    <FontAwesomeIcon icon={faCalendarPlus} /> Create Event
+                    </a>
+                  </div>
+                  <div className="buttons">
+                    <a href="#" className="btn btn-red" onClick={handleCommunity}>
+                    <FontAwesomeIcon icon={faArrowRightFromBracket}  /> Leave from the Community
                     </a>
                   </div>
                 </div>
-                <div className="box top-contributors">
+                <div className="box recommended-communities">
+                  <h3>Owner </h3>
+                  <div className="inner-box">
+                    <div className="img">
+                      <img src={pp1} alt="" />
+                    </div>
+                    <div className="details">
+                      <a href="#">Captain-D</a>
+                      <span>77 Posts</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="box community-info">
                   <h3> Community Moderators</h3>
                   <a href="#">
                     View All <FontAwesomeIcon icon={faArrowRight} />
@@ -136,15 +170,18 @@ function CommunityComponent() {
                     </div>
                   </div>
                 </div>
-                <div className="box recommended-communities">
-                  <h3>Owner </h3>
+                <div className="box community-info">
+                  <h3> Member List</h3>
+                  <a href="#">
+                    View All <FontAwesomeIcon icon={faArrowRight} />
+                  </a>
                   <div className="inner-box">
                     <div className="img">
                       <img src={pp1} alt="" />
                     </div>
                     <div className="details">
-                      <a href="#">Code Crew</a>
-                      <span>77 members</span>
+                      <a href="#">Captain D</a>
+                      <span>202 replies</span>
                     </div>
                   </div>
                   <div className="inner-box">
@@ -152,8 +189,8 @@ function CommunityComponent() {
                       <img src={pp1} alt="" />
                     </div>
                     <div className="details">
-                      <a href="#">Pet Pals</a>
-                      <span>77 members</span>
+                      <a href="#">oldguy</a>
+                      <span>196 replies</span>
                     </div>
                   </div>
                   <div className="inner-box">
@@ -161,11 +198,12 @@ function CommunityComponent() {
                       <img src={pp1} alt="" />
                     </div>
                     <div className="details">
-                      <a href="#">Time Travelers</a>
-                      <span>77 members</span>
+                      <a href="#">Inferno</a>
+                      <span>174 replies</span>
                     </div>
                   </div>
                 </div>
+              
               </section>
             </div>
           </div>

@@ -35,6 +35,7 @@
     justify-content: space-between;
     width: 100%;
     padding: 10px 20px;
+    margin-bottom: 50px;
 }
 
 .accountsettings .form .form-group{
@@ -88,3 +89,140 @@
         margin-bottom: 5px;
     }
 } 
+
+
+
+/* ******************************* CHANGE PASSWORD SECTION ************************************************** */
+
+.changepassword{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.changepassword .form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+}
+
+.changepassword .form .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    margin: 10px;
+}
+
+.changepassword .form .form-group label {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.changepassword .form .form-group input {
+    padding: 10px 20px;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    outline: none; 
+}
+
+.changepassword h1 {
+    padding: 10px 20px;
+    color: var(--darkRedColor); 
+}
+
+
+/* ******************************* CHANGE MAIL SECTION ************************************************** */
+
+
+.changemail{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.changemail .form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+}
+
+.changemail .form .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    margin: 10px;
+}
+
+.changemail .form .form-group label {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.changemail .form .form-group input {
+    padding: 10px 20px;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    outline: none; 
+}
+
+.changemail h1 {
+    padding: 10px 20px;
+    color: var(--darkRedColor); 
+}
+
+/* ******************************* CHANGE NICKNAME SECTION ************************************************** */
+
+
+.changeNickname{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.changeNickname .form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+}
+
+.changeNickname .form .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    margin: 10px;
+}
+
+.changeNickname .form .form-group label {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.changeNickname .form .form-group input {
+    padding: 10px 20px;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    outline: none; 
+}
+
+.changeNickname h1 {
+    padding: 10px 20px;
+    color: var(--darkRedColor); 
+}

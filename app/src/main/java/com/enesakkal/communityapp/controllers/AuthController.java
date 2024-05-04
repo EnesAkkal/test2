@@ -25,6 +25,9 @@ public class AuthController {
         return ResponseEntity.ok("System Working");
     }
 
+    // @ RequestBody -> This annotation indicates that a method parameter should be bound to the body of the HTTP request.
+    // @Valid -> This annotation is used to ensure that the incoming data adheres to the constraints set in the CredentialsDto class
+    // @valid is provided by jakarta. 
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto userDto = loginService.login(credentialsDto);

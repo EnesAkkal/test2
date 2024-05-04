@@ -30,21 +30,7 @@ public class PostService {
         return repository.existsByTitle(title);
     }
 
-    public boolean existsByBody(String body) {
-        return repository.existsByBody(body);
-    }
-
-    public boolean existsByTemplates(List<Template> templates) {
-        return repository.existsByTemplates(templates);
-    }
-
-    public boolean existsByCreatedAt(Date createdAt) {
-        return repository.existsByCreatedAt(createdAt);
-    }
-
-    public boolean existsByLastModifiedDate(Date lastModifiedDate) {
-        return repository.existsByLastModifiedDate(lastModifiedDate);
-    }
+    
 
     public Post createPost(Post post) {
         return repository.save(post);

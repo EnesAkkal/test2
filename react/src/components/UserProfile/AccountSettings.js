@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/AccountSettings.css";
+import "../../styles/AccountSettings.css";
 
 const AccountSettings = () => {
   return (
@@ -15,17 +15,17 @@ const AccountSettings = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone">
-              Phone/Mobile <span>*</span>
+            <label htmlFor="surname">
+              Your Surname <span>*</span>
             </label>
-            <input type="text" name="phone" id="phone" />
+            <input type="text" name="surname" id="surname" />
           </div>
 
           <div className="form-group">
-            <label htmlFor="gender">
-              Gender <span>*</span>
+            <label htmlFor="Phone">
+              Your Phone Number <span>*</span>
             </label>
-            <input type="gender" name="gender" id="gender" />
+            <input type="number" name="number" id="number" />
           </div>
 
           <div className="form-group">

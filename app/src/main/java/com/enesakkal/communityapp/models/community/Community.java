@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 import java.util.List;
 
-@Data  // this is from lombok, this reduces the usage of getter/setter consturctors and initializations
+@Data  // this is from lombok library, this reduces the usage of getter/setter consturctors and initializations
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "communities") // this is going to be our table name 
