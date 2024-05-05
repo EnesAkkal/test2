@@ -50,7 +50,7 @@ function LoginFormPageComponent() {
             setAuth(response?.data);
             setFormData({ username: '', email: '', password: '' })
             alert("Login Success")
-            navigate(from, { replace: true });
+            navigate('/home', { replace: true });
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');

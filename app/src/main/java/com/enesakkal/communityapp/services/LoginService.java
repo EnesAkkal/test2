@@ -1,5 +1,4 @@
 package com.enesakkal.communityapp.services;
-
 import com.enesakkal.communityapp.dtos.CredentialsDto;
 import com.enesakkal.communityapp.dtos.SignUpDto;
 import com.enesakkal.communityapp.dtos.UserDto;
@@ -8,7 +7,6 @@ import com.enesakkal.communityapp.models.user.User;
 import com.enesakkal.communityapp.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
