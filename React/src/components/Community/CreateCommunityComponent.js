@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "../styles/post.css";
-import HeaderComponent from "./HeaderComponent.js";
-import FooterComponent from "./FooterComponent.js";
-import useAuth from "../hooks/useAuth.js";
-import axios from "api/axios.js";
+import "../../styles/post.css";
+import FooterComponent from "../../components/FooterComponent.js";
+import HeaderComponent from "../../components/HeaderComponent.js";
+import useAuth from "../../hooks/useAuth.js";
+import axios from "../../api/axios.js";
 
 const CREATE_URL = "/community/create";
 function CreateCommunityComponent() {

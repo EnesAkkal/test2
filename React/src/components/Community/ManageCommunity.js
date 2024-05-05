@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from "react-router-dom";
-import "../styles/managecommunity.css";
-import HeaderComponent from './HeaderComponent.js';
-import FooterComponent from './FooterComponent.js';
+import "../../styles/managecommunity.css";
+import HeaderComponent from '../HeaderComponent.js';
+import FooterComponent from '../FooterComponent.js';
 import CommunitySideBar from './CommunitySideBar.js';
 import KickUserComponent from './KickUserComponent.js';
 import TransferOwnershipComponent from './TransferOwnershipComponent.js';

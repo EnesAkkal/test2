@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import axios from "../api/axios.js";
-import useAuth from "../hooks/useAuth.js";
+import axios from "../../api/axios.js";
+import useAuth from "../../hooks/useAuth.js";
 
 const CommunityTableElement = ({ community }) => {
     const { _id, name, tags, postCount, memberCount } = community;

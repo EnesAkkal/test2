@@ -1,5 +1,5 @@
 import React from 'react'
-import "../styles/AccountSettings.css";
+import "../../styles/AccountSettings.css";
 
 function KickUserComponent() {
   return (

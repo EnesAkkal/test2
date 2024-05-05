@@ -1,6 +1,6 @@
 import { Component } from "react";
-import "../styles/homepage.css";
-import "../styles/community.css";
+import "../../styles/homepage.css";
+import "../../styles/community.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComment,
@@ -11,9 +11,10 @@ import {
   faArrowRightFromBracket,
   faSquarePlus
 } from "@fortawesome/free-solid-svg-icons";
-import pp1 from "../assets/pp1.jpg";
-import FooterComponent from "./FooterComponent.js";
-import HeaderComponent from "./HeaderComponent.js";
+import pp1 from "../../assets/pp1.jpg";
+import FooterComponent from "../../components/FooterComponent.js";
+import HeaderComponent from "../../components/HeaderComponent.js";
+
 function CommunityComponent() {
 
   const handleCommunity = () => {

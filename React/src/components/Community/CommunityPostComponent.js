@@ -1,7 +1,7 @@
 import React from "react";
-import HeaderComponent from "./HeaderComponent.js";
-import FooterComponent from "./FooterComponent.js";
-import "../styles/Test.css";
+import FooterComponent from "../../components/FooterComponent.js";
+import HeaderComponent from "../../components/HeaderComponent.js";
+import "../../styles/Test.css";
 
 function Test() {
   return (

@@ -2,7 +2,7 @@ import { Component } from "react";
 import "../styles/homepage.css";
 import FooterComponent from "./FooterComponent.js";
 import HeaderComponent from "./HeaderComponent.js";
-import CommunityTableElement from "./CommunityTableElement.js";
+import CommunityTableElement from "./Community/CommunityTableElement.js";
 import axios from "../api/axios.js";
 
 class HomePageComponent extends Component {
