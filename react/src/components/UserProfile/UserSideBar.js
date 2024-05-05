@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock,faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import "../../styles/UserSideBar.css";
 
 const UserSideBar = ({ activepage }) => {
@@ -50,7 +50,7 @@ const UserSideBar = ({ activepage }) => {
       {
         activepage === 'changemail' ?
           <div className='s2'>
-            
+            <FontAwesomeIcon icon={faEnvelope} />
             <span>Change Email</span>
           </div>
 
@@ -58,8 +58,7 @@ const UserSideBar = ({ activepage }) => {
           <Link
             to='/user/changemail' className='stylenone'>
             <div className='s1'>
-             
-
+            <FontAwesomeIcon icon={faEnvelope} />
               <span>Change Email</span>
             </div>
           </Link>

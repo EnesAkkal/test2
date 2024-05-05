@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOut, faUser, faEllipsisVertical, faMagnifyingGlass, faUsers, faComment as faCommentRegular, faEye as faEyeRegular, faUserLarge, faSign, faHome } from '@fortawesome/free-solid-svg-icons';
-import { faBell, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faSignOut, faUser, faEllipsisVertical, faMagnifyingGlass, faUsers, faComment as faCommentRegular, faEye as faEyeRegular, faUserLarge, faSign, faHome, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 import '../styles/header.css';
 
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -37,6 +37,9 @@ function HeaderComponent() {
             </div>
             <div className="nav-group">
               <ul>
+              <div className='home'>
+              <FontAwesomeIcon icon={faArrowLeft} className='home' />
+              </div>
               <div className="home">
               <a onClick={home}> <FontAwesomeIcon icon={faHome} className='home' /> </a>
             </div>

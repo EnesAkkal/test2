@@ -17,11 +17,11 @@ const ManageCommunity = () => {
   return (
     <>
      <HeaderComponent />
-      <div className="userprofile">
+      <div className="communityprofile">
         {/* UserProfile , showing {activepage}
          */}
 
-        <div className="userprofilein">
+        <div className="communityprofilein">
           <div className="left">
           <CommunitySideBar activepage={activepage} />
           </div>

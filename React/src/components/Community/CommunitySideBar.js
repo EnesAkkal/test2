@@ -1,28 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import "../../styles/UserSideBar.css";
+import { faUserPlus, faUserTie,faX,faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import "../../styles/communitysidebar.css";
 
 const CommunitySideBar = ({ activepage }) => {
   return (
     <>
-    <div className='usersidebar'>
+    <div className='communitysidebar'>
         {
         activepage === 'kickuser' ?
           <div className='s2'>
-                 <FontAwesomeIcon icon={faUser} />
+                 <FontAwesomeIcon icon={faX}  />
             <span>Kickuser</span>
           </div>
 
           :
           <Link
           to='/community/settings/kickuser'
-          className='stylenone'
 
         >
           <div className='s1'>
-          <FontAwesomeIcon icon={faUser} />
+          <FontAwesomeIcon icon={faX} />
             <span>Kick User</span>
           </div>
         </Link>
@@ -33,7 +32,7 @@ const CommunitySideBar = ({ activepage }) => {
       {
         activepage === 'transferownership' ?
           <div className='s2'>
-              <FontAwesomeIcon icon={faLock} />
+              <FontAwesomeIcon icon={faArrowRightArrowLeft} />
             <span>Transfer Ownership</span>
           </div>
 
@@ -41,7 +40,7 @@ const CommunitySideBar = ({ activepage }) => {
           <Link
             to='/community/settings/transferownership' className='stylenone'>
             <div className='s1'>
-            <FontAwesomeIcon icon={faLock} />
+            <FontAwesomeIcon icon={faArrowRightArrowLeft} />
               <span>Transfer Ownership</span>
             </div>
           </Link>
@@ -50,7 +49,7 @@ const CommunitySideBar = ({ activepage }) => {
 {
         activepage === 'roles' ?
           <div className='s2'>
-              <FontAwesomeIcon icon={faLock} />
+             <FontAwesomeIcon icon={faUserTie} />
             <span>Assign Community Moderators</span>
           </div>
 
@@ -58,7 +57,7 @@ const CommunitySideBar = ({ activepage }) => {
           <Link
             to='/community/settings/roles' className='stylenone'>
             <div className='s1'>
-            
+            <FontAwesomeIcon icon={faUserTie} />
               <span>Assign Community Moderators</span>
             </div>
           </Link>
@@ -68,8 +67,7 @@ const CommunitySideBar = ({ activepage }) => {
         activepage === 'inviteusers' ?
 
           <div className='s2'>
-            
-
+            <FontAwesomeIcon icon={faUserPlus} />
             <span>Invite Users</span>
           </div>
 
@@ -77,8 +75,7 @@ const CommunitySideBar = ({ activepage }) => {
           <Link
             to='/community/settings/invite' className='stylenone'>
             <div className='s1'>
-            
-
+            <FontAwesomeIcon icon={faUserPlus} />
               <span>Invite Users</span>
             </div>
           </Link>
