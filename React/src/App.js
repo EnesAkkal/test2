@@ -9,6 +9,7 @@ import CreateCommunityComponent from "./components/Community/CreateCommunityComp
 import CommunityComponent from 'components/Community/CommunityComponent.js';
 import RequireAuth from 'components/ReqiureAuth.js';
 import ManageCommunity from './components/Community/ManageCommunity.js';
+import CustomTemplateComponent from 'components/Community/CustomTemplateComponent.js';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/communitypost" element={<CommunityPostComponent />} />
         <Route path="/community" element={<CommunityComponent />} />
         <Route path="/community/settings/:activepage" element={<ManageCommunity />} />
+        <Route path='/community/createTemplate' element={<CustomTemplateComponent/>} />
       </Route>
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>

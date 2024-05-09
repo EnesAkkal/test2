@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+// Spring Data repositories provide a way to define query methods in an interface by simply declaring method signatures.
+
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
     // this method may or may not return post object

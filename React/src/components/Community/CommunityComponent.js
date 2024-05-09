@@ -9,7 +9,8 @@ import {
   faThumbsUp,
   faCalendarPlus,
   faArrowRightFromBracket,
-  faSquarePlus
+  faSquarePlus,
+  faSliders
 } from "@fortawesome/free-solid-svg-icons";
 import pp1 from "../../assets/pp1.jpg";
 import FooterComponent from "../../components/FooterComponent.js";
@@ -117,7 +118,12 @@ function CommunityComponent() {
                   </div>
                   <div className="buttons">
                     <a href="#" className="btn btn-red" onClick={createPost}>
-                    <FontAwesomeIcon icon={faSquarePlus}/> Create Template
+                    <FontAwesomeIcon icon={faSquarePlus}/> Create Post
+                    </a>
+                  </div>
+                  <div className="buttons">
+                    <a href="#" className="btn btn-red" onClick={createPost}>
+                    <FontAwesomeIcon icon={faSliders} /> Create  Template
                     </a>
                   </div>
                   <div className="buttons">

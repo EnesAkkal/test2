@@ -5,6 +5,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
+// Spring Data repositories provide a way to define query methods in an interface by simply declaring method signatures.
+
+
 @Repository
 public interface UserRepository extends MongoRepository<User, String> { // it takes two parameters, first one is class name that we want to get, 
   //the second one is String because our primary key from User class has a type of String  here ->>> private String _id;

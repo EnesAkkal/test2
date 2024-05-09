@@ -9,6 +9,8 @@ import com.enesakkal.communityapp.services.PostService;
 import com.enesakkal.communityapp.services.TemplateService;
 import com.enesakkal.communityapp.services.UserService;
 import jakarta.validation.Valid;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,5 +70,15 @@ public class CommunityController {
 
         return ResponseEntity.ok(communityService.joinCommunity(userId, communityId));
     }
+
+    @DeleteMapping("/leave/{communityId}")
+    public ResponseEntity<?> leaveCommunity(@RequestBody String userId, @PathVariable String communityId) {
+    try {
+        communityService.leaveCommunity(userId, communityId);
+        return ResponseEntity.ok().build();
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to leave community: " + e.getMessage());
+    }
+}
 
 }
