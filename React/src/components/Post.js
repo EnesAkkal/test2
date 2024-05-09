@@ -13,7 +13,7 @@ function Post() {
             <div className="title">
               <h2>Create New Post</h2>
             </div>
-            <form className="form">
+            <form className="post-form">
               <div className="post_FormContainer">
                 <label for="ftitle">Title</label>
                 <textarea

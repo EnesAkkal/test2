@@ -96,7 +96,7 @@ function LoginFormPageComponent() {
                     <div className={`container ${signUpMode ? 'sign-up-mode' : ''}`}>
                         <div className="signin-signup">
                             <form className={`sign-in-form ${signUpMode ? 'hidden' : ''}`} onSubmit={handleSubmit}>
-                                <h2 className="title">Sign in</h2>
+                                <h2 className="sign-in">Sign in</h2>
                                 <div className="error">{error}</div>
                                 <div className="input-field">
                                     <FontAwesomeIcon icon={faUser} className="icon-user" />
@@ -110,7 +110,7 @@ function LoginFormPageComponent() {
                                 <p className="account-text">Don't have an account? <button type="button" onClick={handleFormToggle}>Sign up</button></p>
                             </form>
                             <form className={`sign-up-form ${signUpMode ? 'hidden' : ''}`} onSubmit={handleSubmit}>
-                                <h2 className="title">Sign up</h2>
+                                <h2 className="sign-up">Sign up</h2>
                                 <div className="error">{error}</div>
                                 <div className="input-field">
                                     <FontAwesomeIcon icon={faUser} className="icon-user" />

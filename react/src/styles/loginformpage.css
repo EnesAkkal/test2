@@ -63,11 +63,24 @@ form.sign-up-form {
     transition: 0.5s ease-in-out;
     transition-delay: 1s;
 }
-.title {
+.sign-in {
     font-size: 35px;
     color: #434343;
     margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
+
+.sign-up {
+    font-size: 35px;
+    color: #434343;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
 .input-field {
     width: 100%;
     height: 50px;
