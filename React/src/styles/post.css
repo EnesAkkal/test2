@@ -96,3 +96,23 @@
     box-sizing: border-box;
     margin-bottom: 20px;
   }
+
+  .template{
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+
+  .post-container select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}

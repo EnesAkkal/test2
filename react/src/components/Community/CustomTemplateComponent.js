@@ -69,14 +69,14 @@ function CustomTemplateComponent() {
                 </div>
                 <div className="flex-row">
                   {inputList.length !== 1 && (
-                    <button
+                    <button className='btn btn-lightblack'
                       onClick={() => handleRemoveClick(index)}
                     >
                       Remove Field
                     </button>
                   )}
                   {inputList.length - 1 === index && (
-                    <button onClick={handleAddClick}>
+                    <button className='btn btn-lightblack' onClick={handleAddClick}>
                       Add Field
                     </button>
                     

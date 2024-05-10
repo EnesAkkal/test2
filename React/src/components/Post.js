@@ -14,6 +14,14 @@ function Post() {
               <h2>Create New Post</h2>
             </div>
             <form className="post-form">
+              <div className="template">
+                Choose a template
+              </div>
+            <select name="templates" id="template">
+              <option value="templates1">templates1</option>
+              <option value="templates2">templates2</option>
+              <option value="templates3">templates3</option>
+            </select>
               <div className="post_FormContainer">
                 <label for="ftitle">Title</label>
                 <textarea

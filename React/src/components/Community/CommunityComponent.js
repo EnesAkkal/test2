@@ -30,6 +30,10 @@ function CommunityComponent() {
     window.location.href = '/community/settings/kickuser';
   }
 
+  const createTemplate = () => {
+    window.location.href = '/community/createTemplate';
+  }
+
   return (
     <>
       <HeaderComponent />
@@ -122,7 +126,7 @@ function CommunityComponent() {
                     </a>
                   </div>
                   <div className="buttons">
-                    <a href="#" className="btn btn-red" onClick={createPost}>
+                    <a href="#" className="btn btn-red" onClick={createTemplate}>
                     <FontAwesomeIcon icon={faSliders} /> Create  Template
                     </a>
                   </div>
