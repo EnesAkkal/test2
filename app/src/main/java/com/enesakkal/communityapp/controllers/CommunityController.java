@@ -71,14 +71,14 @@ public class CommunityController {
         return ResponseEntity.ok(communityService.joinCommunity(userId, communityId));
     }
 
-    @DeleteMapping("/leave/{communityId}")
-    public ResponseEntity<?> leaveCommunity(@RequestBody String userId, @PathVariable String communityId) {
-    try {
-        communityService.leaveCommunity(userId, communityId);
-        return ResponseEntity.ok().build();
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to leave community: " + e.getMessage());
+    @DeleteMapping("/leave/{communityId}") 
+    public ResponseEntity<Community> leaveCommunity(@RequestBody String userId, @PathVariable String communityId) {
+            Community updatedCommunity = communityService.leaveCommunity(userId, communityId);
+            return ResponseEntity.ok(updatedCommunity);
     }
-}
-
+    @GetMapping("/search")
+    public ResponseEntity<List<Community>> searchCommunities(@RequestParam String name) {
+        List<Community> communities = communityService.searchCommunitiesByName(name);
+        return ResponseEntity.ok(communities);
+    }
 }

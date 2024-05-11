@@ -85,30 +85,28 @@ public class CommunityService {
         return community;
     }
 
-    public Community leaveCommunity(String userId, String communityId) {
-        // Find the community or throw if not found
+    public Community leaveCommunity(String userId, String communityId) throws RuntimeException {
         Community community = repository.findById(communityId)
-            .orElseThrow(() -> new RuntimeException("Community not found"));
-    
-        // Find the user or throw if not found
-        User user = userRepository.findBy_id(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-    
-        // Check if the user is actually a member of the community
-        if (community.getMembers() != null && community.getMembers().remove(user)) {
-            // Update the member count if necessary
+                .orElseThrow(() -> new RuntimeException("Community not found"));
+
+        User user = userRepository.findBy_id(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (community.getMembers() != null && community.getMembers().contains(user)) {
+            community.getMembers().remove(user);
             community.setMemberCount(community.getMembers().size());
             repository.save(community);
         } else {
             throw new RuntimeException("User is not a member of this community");
         }
-    
-        // Remove the community from user's followed communities list
-        if (user.getFollowedCommunities() != null && user.getFollowedCommunities().removeIf(communityId::equals)) {
+
+        if (user.getFollowedCommunities() != null && user.getFollowedCommunities().contains(community.get_id())) {
+            user.getFollowedCommunities().remove(community.get_id());
             userRepository.save(user);
         }
-    
+
         return community;
     }
-    
+    public List<Community> searchCommunitiesByName(String name) {
+        return repository.findAllByNameContaining(name);
+    }
 }
