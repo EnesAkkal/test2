@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import "../../styles/customtemplate.css"; 
 import HeaderComponent from '../HeaderComponent.js';
 import FooterComponent from '../FooterComponent.js';
+import axios from "api/axios.js";
+
 
 
 function CustomTemplateComponent() {
   const [inputList, setInputList] = useState([{ name: "", dataType: "Text" }]);
+  const [templateName, setTemplateName] = useState("");
+
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -22,6 +26,25 @@ function CustomTemplateComponent() {
 
   const handleAddClick = () => {
     setInputList([...inputList, { name: "", dataType: "Text" }]);
+  };
+
+  const handleTemplateNameChange = (e) => {
+    setTemplateName(e.target.value);
+  };
+
+  const handleSaveTemplate = async () => {
+    if (!templateName) {
+      alert("Please enter a template name.");
+      return;
+    }
+    try {
+      const response = await axios.post('/api/templates', { name: templateName, fields: inputList });
+      console.log(response.data);
+      alert('Template saved successfully!');
+    } catch (error) {
+      console.error('Failed to save template:', error);
+      alert('Error saving template.');
+    }
   };
 
   return (

@@ -2,12 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faComment } from '@fortawesome/free-solid-svg-icons';
 
 function PostTableElement({ post }) {
+    
     console.log("Post data received:", post);
     const { _id,username, title, body, upVotes, downVotes, commentCount, comments, createdAt, lastModifiedDate } = post;
-    console.log("post", post);
+    
+
+    
+
     return (
         <div className="post-info-area">
-            <p>by {username}</p>
+            <p>by {username} on {createdAt}</p>
             <div className="post-title">
                 <h3>
                     {title}

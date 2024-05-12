@@ -120,4 +120,5 @@ public class CommunityController {
         communityService.leaveCommunity(userId, id);
         return ResponseEntity.ok("User left community successfully");
     }
+
 }

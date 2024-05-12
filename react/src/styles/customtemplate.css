@@ -106,3 +106,15 @@
   .template_FormContainer {
     width: 100%;
   }
+
+  input[id^="name-"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+

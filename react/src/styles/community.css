@@ -28,6 +28,8 @@
   height: 1000px;
   justify-content: space-evenly;
   align-items: center;
+  overflow-y: auto;
+  max-height: 250vh;
 }
 
 .post-content {
