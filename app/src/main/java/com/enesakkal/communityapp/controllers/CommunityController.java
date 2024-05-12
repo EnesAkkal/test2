@@ -1,4 +1,5 @@
 package com.enesakkal.communityapp.controllers;
+
 import com.enesakkal.communityapp.dtos.CreateCommunityDto;
 import com.enesakkal.communityapp.models.community.Community;
 import com.enesakkal.communityapp.models.post.Post;
@@ -9,11 +10,10 @@ import com.enesakkal.communityapp.services.PostService;
 import com.enesakkal.communityapp.services.TemplateService;
 import com.enesakkal.communityapp.services.UserService;
 import jakarta.validation.Valid;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,19 +26,28 @@ public class CommunityController {
 
     private final UserService userService;
 
-    public CommunityController(PostService postService, TemplateService templateService, CommunityService communityService, UserService userService){
+    public CommunityController(PostService postService, TemplateService templateService,
+            CommunityService communityService, UserService userService) {
         this.postService = postService;
         this.templateService = templateService;
         this.communityService = communityService;
         this.userService = userService;
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Community> getCommunity(@PathVariable String id) {
+        return ResponseEntity.ok(communityService.getCommunity(id));
+    }
+
     @GetMapping()
-    public ResponseEntity<List<Community>> getCommunities(@RequestParam(required = false, name = "filter") String filter) {
+    public ResponseEntity<List<Community>> getCommunities(
+            @RequestParam(required = false, name = "filter") String filter) {
         if (filter == null || filter.isEmpty()) {
             return ResponseEntity.ok(communityService.getCommunities());
         }
         return ResponseEntity.ok(communityService.getCommunities(filter));
     }
+
     @GetMapping("/posts")
     public ResponseEntity<List<Post>> getPosts() {
         return ResponseEntity.ok(postService.getAllPosts());
@@ -51,18 +60,22 @@ public class CommunityController {
     }
 
     @PostMapping("/create")
-    //@RequestBody takes this JSON data and converts it into a CreateCommunityDto object.
+    // @RequestBody takes this JSON data and converts it into a CreateCommunityDto
+    // object.
     public ResponseEntity<Community> createCommunity(@RequestBody @Valid CreateCommunityDto community) {
-    //Response entity is used for if the request was successful or if there was an error, among other outcomes. ex:http ->404 not found
+        // Response entity is used for if the request was successful or if there was an
+        // error, among other outcomes. ex:http ->404 not found
         User owner = userService.getUserById(community.getOwnerId());
 
         Community newCommunity = new Community();
         newCommunity.setName(community.getName());
         newCommunity.setDescription(community.getDescription());
-        newCommunity.setPrivate(community.isPrivate());
+        newCommunity.setPrivate(Boolean.parseBoolean(community.getIsPrivate()));
         newCommunity.setOwner(owner);
         newCommunity.setTags(List.of(community.getTags()));
-        return ResponseEntity.ok(communityService.createCommunity(newCommunity));
+        newCommunity.setCreatedAt(new Date());
+        newCommunity.setLastModifiedDate(new Date());
+        return ResponseEntity.ok(communityService.putCommunity(newCommunity));
     }
 
     @PostMapping("/join/{communityId}")
@@ -71,14 +84,40 @@ public class CommunityController {
         return ResponseEntity.ok(communityService.joinCommunity(userId, communityId));
     }
 
-    @DeleteMapping("/leave/{communityId}") 
-    public ResponseEntity<Community> leaveCommunity(@RequestBody String userId, @PathVariable String communityId) {
-            Community updatedCommunity = communityService.leaveCommunity(userId, communityId);
-            return ResponseEntity.ok(updatedCommunity);
+    @DeleteMapping("/deleteall")
+    public ResponseEntity<String> deleteAll() {
+        communityService.deleteAll();
+        return ResponseEntity.ok("All communities deleted");
     }
+
+    @PostMapping("/{id}/createpost")
+    public ResponseEntity<Post> createPost(@RequestBody Post post, @PathVariable String id) {
+
+        Community community = communityService.getCommunity(id);
+        if (community == null) {
+            throw new RuntimeException("Community not found");
+        }
+        post.setCommunityId(community.get_id());
+        Post newPost = postService.createPost(post);
+
+        // update the post count of the community
+        community.setPostCount(community.getPostCount() + 1);
+        // update posts of the community
+        community.getPosts().add(post);
+        communityService.putCommunity(community);
+
+        return ResponseEntity.ok(newPost);
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<Community>> searchCommunities(@RequestParam String name) {
         List<Community> communities = communityService.searchCommunitiesByName(name);
         return ResponseEntity.ok(communities);
+    }
+
+    @GetMapping("/{id}/leave")
+    public ResponseEntity<String> leaveCommunity(@RequestParam String userId, @PathVariable String id) {
+        communityService.leaveCommunity(userId, id);
+        return ResponseEntity.ok("User left community successfully");
     }
 }

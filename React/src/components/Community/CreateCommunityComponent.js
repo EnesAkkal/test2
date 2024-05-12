@@ -4,6 +4,7 @@ import FooterComponent from "../../components/FooterComponent.js";
 import HeaderComponent from "../../components/HeaderComponent.js";
 import useAuth from "../../hooks/useAuth.js";
 import axios from "../../api/axios.js";
+import { useNavigate } from "react-router-dom";
 
 const CREATE_URL = "/community/create";
 function CreateCommunityComponent() {
@@ -18,15 +19,26 @@ function CreateCommunityComponent() {
     isPrivate: false, // Set the community's privacy status to public by default.
   });
 
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCommunity((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+    if(name === "isPrivate") {
+        console.log(community.isPrivate)
+        setCommunity((prev) => {
+            return {
+            ...prev,
+            [name]: !prev.isPrivate,
+            };
+        });
+
+    }else{
+        setCommunity((prev) => {
+            return {
+            ...prev,
+            [name]: value,
+            };
+        });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -54,6 +66,7 @@ function CreateCommunityComponent() {
         }
       );
       alert("Create Success" + JSON.stringify(response?.data));
+      navigate(`/community/${response?.data._id}`); // Redirect to the newly created community's page after creation.      
     } catch (err) {
       if (!err?.response) {
         console.log('No Server Response');
@@ -86,7 +99,6 @@ function CreateCommunityComponent() {
                   <input
                     type="checkbox"
                     name="isPrivate"
-                    value={community.isPrivate}
                     onChange={handleChange}
                   />
                   <span>Private</span>

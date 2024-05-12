@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOut, faUser, faEllipsisVertical, faMagnifyingGlass, faUsers, faComment as faCommentRegular, faEye as faEyeRegular, faUserLarge, faSign, faHome, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faSignOut, faUser, faHome, faArrowLeft, faHouseMedical } from '@fortawesome/free-solid-svg-icons';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import '../styles/header.css';
+import SearchBar from './SearchBar.js';
 
-import { Navigate, useNavigate } from 'react-router-dom';
 function HeaderComponent() {
 
   const handleLogout = () => {
@@ -29,25 +29,20 @@ function HeaderComponent() {
       <div className="row">
         <div className="homefeed-container">
           <div className="header-content">
-            <div className="nav-search">
-              <div className="form-group">
-                <input type="text" placeholder="Search For Communities" />
-                <FontAwesomeIcon icon={faMagnifyingGlass} className="icon-search" />
-              </div>
-            </div>
+            <SearchBar />
             <div className="nav-group">
               <ul>
-              <div className='home'>
-              <FontAwesomeIcon icon={faArrowLeft} className='home' />
-              </div>
-              <div className="home">
-              <a onClick={home}> <FontAwesomeIcon icon={faHome} className='home' /> </a>
-            </div>
+                <div className='home'>
+                  <FontAwesomeIcon icon={faArrowLeft} className='home' />
+                </div>
+                <div className="home">
+                  <a onClick={home}> <FontAwesomeIcon icon={faHome} className='home' /> </a>
+                </div>
                 <li>
                   <a href="#"><FontAwesomeIcon icon={faBell} title="Notifications" /></a>
                 </li>
                 <li>
-                  <a className="createCommunity"> <FontAwesomeIcon icon={faUsers} onClick={communityCreate} /></a>
+                  <a className="createCommunity"> <FontAwesomeIcon icon={faHouseMedical} onClick={communityCreate} /></a>
                 </li>
                 <li className="join">
                   <a href="#">
@@ -57,7 +52,7 @@ function HeaderComponent() {
                 <li>
                   <a className="logout"> <FontAwesomeIcon icon={faSignOut} onClick={handleLogout} /></a>
                 </li>
-             
+
               </ul>
             </div>
           </div>

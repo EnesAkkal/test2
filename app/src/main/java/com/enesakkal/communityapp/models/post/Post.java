@@ -19,6 +19,7 @@ public class Post {
 
     @Id
     private String _id;
+    private String username;
     private String title;
     private String body;
     private String communityId;

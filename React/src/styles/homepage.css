@@ -247,6 +247,7 @@ footer {
     width: 30%;
     min-width: 30%;
     padding-left: 10%;
+    cursor: pointer;
 }
 
 .posts_category{

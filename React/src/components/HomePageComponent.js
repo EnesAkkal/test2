@@ -41,7 +41,9 @@ class HomePageComponent extends Component {
                     <div className="posts_posts">Join</div>
                   </div>
                   <div className="inner-left">
-                    {this.state.communities.map((community, index) => {
+                    {this.state.communities
+                        .filter(x=> !x.private)
+                        .map((community, index) => {
                       return <CommunityTableElement key={index} community={community} />
                     })}
 

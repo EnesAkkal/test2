@@ -32,10 +32,10 @@ public class Community {
     private Date createdAt;
     @LastModifiedDate
     private Date lastModifiedDate;
-    private List<User> moderators;
-    private List<User> members;
-    private List<User> bannedUsers;
-    private List<Post> posts;
-    private List<String> tags;
+    private List<User> moderators = List.of();
+    private List<User> members = List.of();
+    private List<User> bannedUsers = List.of();
+    private List<Post> posts = List.of();
+    private List<String> tags = List.of();
 
 }

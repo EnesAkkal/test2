@@ -1,9 +1,9 @@
 package com.enesakkal.communityapp.services;
+
 import com.enesakkal.communityapp.models.community.Community;
 import com.enesakkal.communityapp.models.user.User;
 import com.enesakkal.communityapp.repositories.CommunityRepository;
 import com.enesakkal.communityapp.repositories.UserRepository;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +14,7 @@ public class CommunityService {
     private final CommunityRepository repository;
 
     private final UserRepository userRepository;
+
     public CommunityService(CommunityRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
@@ -41,40 +42,41 @@ public class CommunityService {
         return repository.existsByDescription(description);
     }
 
-    public List<Community> getCommunities(String filter){
+    public List<Community> getCommunities(String filter) {
         if (filter == null) {
             return repository.findAll();
         }
         return repository.findAllByNameContaining(filter);
     }
-    public List<Community> getCommunities(){
+
+    public List<Community> getCommunities() {
         return repository.findAll();
     }
 
-    public Community createCommunity(Community community) {
+    public Community putCommunity(Community community) {
         return repository.save(community);
     }
 
     public Community joinCommunity(String userId, String communityId) {
 
-        Community community = repository.findById(communityId
-        ).orElseThrow(() -> new RuntimeException("Community not found"));
+        Community community = repository.findById(communityId)
+                .orElseThrow(() -> new RuntimeException("Community not found"));
 
         User user = userRepository.findBy_id(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
-        if(community.getMembers()==null){
+        if (community.getMembers() == null) {
             community.setMembers(List.of(user));
-        }else{
-           if(community.getMembers().contains(user)){
-               throw new RuntimeException("User already in community");
-           }
+        } else {
+            if (community.getMembers().contains(user)) {
+                throw new RuntimeException("User already in community");
+            }
             community.getMembers().add(user);
         }
         community.setMemberCount(community.getMembers().size());
 
-        if(user.getFollowedCommunities()==null){
+        if (user.getFollowedCommunities() == null) {
             user.setFollowedCommunities(List.of(community.get_id()));
-        }else{
+        } else {
             user.getFollowedCommunities().add(community.get_id());
         }
 
@@ -85,28 +87,26 @@ public class CommunityService {
         return community;
     }
 
-    public Community leaveCommunity(String userId, String communityId) throws RuntimeException {
-        Community community = repository.findById(communityId)
-                .orElseThrow(() -> new RuntimeException("Community not found"));
-
-        User user = userRepository.findBy_id(userId).orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (community.getMembers() != null && community.getMembers().contains(user)) {
-            community.getMembers().remove(user);
-            community.setMemberCount(community.getMembers().size());
-            repository.save(community);
-        } else {
-            throw new RuntimeException("User is not a member of this community");
-        }
-
-        if (user.getFollowedCommunities() != null && user.getFollowedCommunities().contains(community.get_id())) {
-            user.getFollowedCommunities().remove(community.get_id());
-            userRepository.save(user);
-        }
-
-        return community;
+    public Community getCommunity(String id) {
+        return repository.findBy_id(id).orElseThrow(() -> new RuntimeException("Community not found"));
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
     public List<Community> searchCommunitiesByName(String name) {
         return repository.findAllByNameContaining(name);
+    }
+
+    public void leaveCommunity(String userId, String id) {
+   
+        Community community = repository.findById(id).orElseThrow(() -> new RuntimeException("Community not found"));
+        User user = userRepository.findBy_id(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        community.getMembers().remove(user);
+        community.setMemberCount(community.getMembers().size());
+        user.getFollowedCommunities().remove(community.get_id());
+        userRepository.save(user);
+        repository.save(community);
     }
 }

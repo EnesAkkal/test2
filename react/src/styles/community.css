@@ -68,10 +68,10 @@
 
 .reactions a {
   color: black;
-  margin-right: 10px; /* Adjusted from larger margin to a smaller one */
+  margin-right: 10px; 
   font-size: 18px;
-  display: inline-flex; /* Ensures the alignment is clean */
-  align-items: center; /* Centers the text with the icons vertically */
+  display: inline-flex; 
+  align-items: center;
   text-decoration: none;
 }
 

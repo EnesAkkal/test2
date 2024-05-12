@@ -4,10 +4,8 @@ import com.enesakkal.communityapp.models.post.Comment;
 import com.enesakkal.communityapp.models.post.Post;
 import com.enesakkal.communityapp.models.post.Template;
 import com.enesakkal.communityapp.repositories.PostRepository;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +31,7 @@ public class PostService {
     
 
     public Post createPost(Post post) {
+        
         return repository.save(post);
     }
 
@@ -64,6 +63,5 @@ public class PostService {
     public void deleteAllPosts() {
         repository.deleteAll();
     }
-
 
 }

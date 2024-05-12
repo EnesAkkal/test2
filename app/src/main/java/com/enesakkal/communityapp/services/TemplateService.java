@@ -2,7 +2,6 @@ package com.enesakkal.communityapp.services;
 import com.enesakkal.communityapp.models.post.Post;
 import com.enesakkal.communityapp.models.post.Template;
 import com.enesakkal.communityapp.repositories.PostRepository;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class TemplateService {
     }
 
 
-    public void deleteTemplate(String postId, ObjectId templateId) {
+    public void deleteTemplate(String postId, String templateId) {
         Post post = repository.findById(postId).orElse(null);
         if (post != null) {
             // Find and remove the template with the given templateId

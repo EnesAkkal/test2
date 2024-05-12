@@ -4,7 +4,6 @@ import com.enesakkal.communityapp.dtos.UserDto;
 import com.enesakkal.communityapp.models.post.Comment;
 import com.enesakkal.communityapp.models.post.Post;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,7 +17,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class User {
 
     private String _id;
@@ -26,14 +24,15 @@ public class User {
     private String password;
     private String email;
     private Date registeredAt;
-    private List<Post> posts;
-    private List<Comment> comments;
-    private List<String> followedCommunities;
-    private List<String> createdCommunities;
+    private List<Post> posts = List.of();
+    private List<Comment> comments = List.of();
+    private List<String> followedCommunities = List.of();
+    private List<String> createdCommunities = List.of();
     @CreatedDate
     private Date createdAt;
     @LastModifiedDate
     private Date lastModifiedDate;
+
     public UserDto toUserDto() {
         return UserDto.builder()
                 ._id(_id)
@@ -42,6 +41,5 @@ public class User {
                 .build();
 
     }
-
 
 }
