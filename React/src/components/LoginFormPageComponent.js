@@ -18,6 +18,11 @@ function LoginFormPageComponent() {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+
     const handleFormToggle = () => {
         setSignUpMode(!signUpMode);
         setErrMsg(null);
@@ -33,6 +38,18 @@ function LoginFormPageComponent() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!formData.username || !formData.password || (signUpMode && !formData.email)) {
+            setErrMsg('Please fill in all fields');
+            return;
+        }
+        if (signUpMode && !validateEmail(formData.email)) {
+            setErrMsg('Invalid email format');
+            return;
+        }
+        if (formData.password.length < 8) {
+            setErrMsg('Password must be at least 8 characters long');
+            return;
+        }
         signUpMode ? register() : login();
     };
 
@@ -45,11 +62,9 @@ function LoginFormPageComponent() {
                     withCredentials: true
                 }
             );
-            console.log(response);
-            console.log(JSON.stringify(response?.data));
             setAuth(response?.data);
-            setFormData({ username: '', email: '', password: '' })
-            alert("Login Success")
+            setFormData({ username: '', email: '', password: '' });
+            alert("Login Success");
             navigate('/home', { replace: true });
         } catch (err) {
             if (!err?.response) {
@@ -59,35 +74,33 @@ function LoginFormPageComponent() {
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
             } else {
-                console.log(err)
+                setErrMsg('Login Failed');
             }
         }
-    }
+    };
 
     const register = async () => {
         try {
             const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ username:formData.username,password:formData.password ,email:formData.email}),
+                JSON.stringify({ username: formData.username, password: formData.password, email: formData.email }),
                 {
                     headers: { 'Content-Type': 'application/json' }
                 }
             );
-            console.log(JSON.stringify(response));
             setFormData({ username: '', email: '', password: '' });
-            alert("Register Succes")
+            alert("Register Success");
             navigate(LOGIN_URL, { replace: true });
             setSignUpMode(false);
         } catch (err) {
-            console.log(err)
             if (!err?.response) {
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 409) {
                 setErrMsg('Username Taken');
             } else {
-                setErrMsg('Registration Failed')
+                setErrMsg('Registration Failed');
             }
         }
-    }
+    };
 
     return (
         <div className="body-register">
@@ -95,34 +108,34 @@ function LoginFormPageComponent() {
                 <header className="App-header">
                     <div className={`container ${signUpMode ? 'sign-up-mode' : ''}`}>
                         <div className="signin-signup">
-                            <form className={`sign-in-form ${signUpMode ? 'hidden' : ''}`} onSubmit={handleSubmit}>
+                            <form className={`sign-in-form ${!signUpMode ? '' : 'hidden'}`} onSubmit={handleSubmit}>
                                 <h2 className="title">Sign in</h2>
                                 <div className="error">{error}</div>
                                 <div className="input-field">
                                     <FontAwesomeIcon icon={faUser} className="icon-user" />
-                                    <input type="text" name="username" placeholder="Username" onChange={handleChange} />
+                                    <input type="text" name="username" placeholder="Username" onChange={handleChange} value={formData.username} />
                                 </div>
                                 <div className="input-field">
                                     <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                                    <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+                                    <input type="password" name="password" placeholder="Password" onChange={handleChange} value={formData.password} />
                                 </div>
                                 <button type="submit" className="btn">Sign in</button>
                                 <p className="account-text">Don't have an account? <button type="button" onClick={handleFormToggle}>Sign up</button></p>
                             </form>
-                            <form className={`sign-up-form ${signUpMode ? 'hidden' : ''}`} onSubmit={handleSubmit}>
+                            <form className={`sign-up-form ${signUpMode ? '' : 'hidden'}`} onSubmit={handleSubmit}>
                                 <h2 className="title">Sign up</h2>
                                 <div className="error">{error}</div>
                                 <div className="input-field">
                                     <FontAwesomeIcon icon={faUser} className="icon-user" />
-                                    <input type="text" name="username" placeholder="Username" onChange={handleChange} />
+                                    <input type="text" name="username" placeholder="Username" onChange={handleChange} value={formData.username} />
                                 </div>
                                 <div className="input-field">
-                                    <FontAwesomeIcon icon={faEnvelope} className="icon-envolpe" />
-                                    <input type="text" name="email" placeholder="Email" onChange={handleChange} />
+                                    <FontAwesomeIcon icon={faEnvelope} className="icon-envelope" />
+                                    <input type="text" name="email" placeholder="Email" onChange={handleChange} value={formData.email} />
                                 </div>
                                 <div className="input-field">
                                     <FontAwesomeIcon icon={faLock} className="icon-lock" />
-                                    <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+                                    <input type="password" name="password" placeholder="Password" onChange={handleChange} value={formData.password} />
                                 </div>
                                 <button type="submit" className="btn">Sign up</button>
                                 <p className="account-text">Already have an account? <button type="button" onClick={handleFormToggle}>Sign in</button></p>
