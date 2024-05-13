@@ -116,3 +116,7 @@
     box-sizing: border-box;
     margin-bottom: 20px;
 }
+
+.template-content{
+  width: 100%;
+}

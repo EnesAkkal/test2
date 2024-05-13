@@ -7,53 +7,52 @@ import axios from "../../api/axios.js";
 import { useNavigate } from "react-router-dom";
 
 const CREATE_URL = "/community/create";
+
 function CreateCommunityComponent() {
-  // this line Utilize custom authentication hook to access user authentication status and data.
-  const { auth } = useAuth();
-  // State hook for managing community details. Initializes state with the authenticated user's ID and default values for community properties.
+  const { auth } = useAuth(); // Custom authentication hook to access user authentication status and data.
   const [community, setCommunity] = useState({
     ownerId: auth._id,
-    description: "1",
-    name: "1",
-    tags: ["1"],
-    isPrivate: false, // Set the community's privacy status to public by default.
+    description: "",
+    name: "",
+    tags: [],
+    isPrivate: false,
   });
 
+  const [errors, setErrors] = useState({});
+
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if(name === "isPrivate") {
-        console.log(community.isPrivate)
-        setCommunity((prev) => {
-            return {
-            ...prev,
-            [name]: !prev.isPrivate,
-            };
-        });
-
-    }else{
-        setCommunity((prev) => {
-            return {
-            ...prev,
-            [name]: value,
-            };
-        });
+    if (name === "isPrivate") {
+      setCommunity(prev => ({ ...prev, [name]: !prev.isPrivate }));
+    } else {
+      setCommunity(prev => ({ ...prev, [name]: value }));
     }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createCommunity();
+    setErrors(prev => ({ ...prev, [name]: "" })); // Clear errors on change
   };
 
   const handleTags = (e) => {
     const { name, value } = e.target;
-    setCommunity((prev) => {
-      return {
-        ...prev,
-        [name]: value.split(","),
-      };
-    });
+    setCommunity(prev => ({ ...prev, [name]: value.split(",").map(tag => tag.trim()) }));
+    setErrors(prev => ({ ...prev, [name]: "" })); // Clear errors on change
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      createCommunity();
+    }
+  };
+
+  const validateForm = () => {
+    let newErrors = {};
+    if (!community.name.trim()) newErrors.name = "Community name is required.";
+    if (!community.tags.length) newErrors.tags = "At least one tag is required.";
+    if (!community.description.trim()) newErrors.description = "Description is required.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const createCommunity = async () => {
@@ -65,18 +64,19 @@ function CreateCommunityComponent() {
           withCredentials: true
         }
       );
-      alert("Create Success" + JSON.stringify(response?.data));
-      navigate(`/community/${response?.data._id}`); // Redirect to the newly created community's page after creation.      
+      alert("Community created successfully: " + JSON.stringify(response?.data));
+      navigate(`/community/${response?.data._id}`);
     } catch (err) {
       if (!err?.response) {
-        console.log('No Server Response');
+        alert('No Server Response');
       } else if (err.response?.status === 400) {
-        console.log('Missing Community Name');
+        alert('Missing Community Name');
       } else {
-        console.log(err)
+        console.error('Error creating community:', err);
+        alert('Failed to create community.');
       }
     }
-  }
+  };
 
   return (
     <div>
@@ -88,31 +88,22 @@ function CreateCommunityComponent() {
               <h2>Create New Community</h2>
             </div>
             <form className="form" onSubmit={handleSubmit}>
-              <label for="name">Name</label>
-              <textarea id="name" name="name" rows="1" onChange={handleChange}> </textarea>
+              <label htmlFor="name">Name</label>
+              <textarea id="name" name="name" rows="1" onChange={handleChange}></textarea>
+              {errors.name && <div className="error">{errors.name}</div>}
 
-              <label for="tags">Tags</label>
+              <label htmlFor="tags">Tags</label>
               <textarea id="tags" name="tags" rows="1" onChange={handleTags}></textarea>
+              {errors.tags && <div className="error">{errors.tags}</div>}
 
-              <div className="flex-row">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="isPrivate"
-                    onChange={handleChange}
-                  />
-                  <span>Private</span>
-                </label>
-              </div>
-              <div className="flex-row">
-                <label for="description">Description</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  rows="6"
-                  onChange={handleChange}
-                ></textarea>
-              </div>
+              <label>
+                <input type="checkbox" name="isPrivate" onChange={handleChange} checked={community.isPrivate} />
+                <span>Private</span>
+              </label>
+
+              <label htmlFor="description">Description</label>
+              <textarea id="description" name="description" rows="6" onChange={handleChange}></textarea>
+              {errors.description && <div className="error">{errors.description}</div>}
 
               <input type="submit" value="Create Community" />
             </form>
