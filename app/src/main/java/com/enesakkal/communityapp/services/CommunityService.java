@@ -64,14 +64,11 @@ public class CommunityService {
 
         User user = userRepository.findBy_id(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (community.getMembers() == null) {
-            community.setMembers(List.of(user));
-        } else {
-            if (community.getMembers().contains(user)) {
-                throw new RuntimeException("User already in community");
-            }
-            community.getMembers().add(user);
+        if (community.getMembers().contains(user)) {
+            throw new RuntimeException("User already in community");
         }
+        community.getMembers().add(user);
+        
         community.setMemberCount(community.getMembers().size());
 
         if (user.getFollowedCommunities() == null) {
@@ -100,7 +97,7 @@ public class CommunityService {
     }
 
     public void leaveCommunity(String userId, String id) {
-   
+
         Community community = repository.findById(id).orElseThrow(() -> new RuntimeException("Community not found"));
         User user = userRepository.findBy_id(userId).orElseThrow(() -> new RuntimeException("User not found"));
         community.getMembers().remove(user);
@@ -108,5 +105,9 @@ public class CommunityService {
         user.getFollowedCommunities().remove(community.get_id());
         userRepository.save(user);
         repository.save(community);
+    }
+
+    public List<Community> getCommunitiesByIds(List<String> followedCommunities) {
+        return repository.findAllBy_id(followedCommunities);
     }
 }

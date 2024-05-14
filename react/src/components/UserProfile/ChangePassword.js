@@ -1,36 +1,37 @@
+import React, { useEffect, useState } from "react";
 import "../../styles/AccountSettings.css";
-
+import "../../styles/AccountSettings.css";
+import axios from "api/axios.js";
+import useAuth from "hooks/useAuth.js";
 
 
 function ChangePassword()  {
+
+  const { auth } = useAuth();
+  const userId = auth._id;
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    axios.get(`/users/${userId}`).then((res) => {
+      setUser(res.data);
+    }
+    );
+  }, []);
+
   return (
     <>
     <div className="changepassword">
       <h1 className="mainhead1"> Password Information</h1>
       <div className="form">
-        <div className="form-group">
-          <label htmlFor="old-password">
-            Old Password <span>*</span>
-          </label>
-          <input type="text" name="password" id="password" />
-        </div>
 
         <div className="form-group">
-          <label htmlFor="new-password">
-            New Password <span>*</span>
+          <label htmlFor="Current-password">
+            <span>Current Password </span>
           </label>
-          <input type="text" name="password" id="password" />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="confirm-password">
-            Confirm New Password <span>*</span>
-          </label>
-          <input type="text" name="password" id="password" />
+          <input type="text" value={user.password} id="password" />
         </div>
       </div>
 
-      <button className="mainbutton1">Update</button>
     </div>
   </>
   )

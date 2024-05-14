@@ -31,18 +31,18 @@ const UserSideBar = ({ activepage }) => {
 
 
       {
-        activepage === 'changepassword' ?
+        activepage === 'password' ?
           <div className='s2'>
               <FontAwesomeIcon icon={faLock} />
-            <span>Change Password</span>
+            <span>Password</span>
           </div>
 
           :
           <Link
-            to='/user/changepassword'>
+            to='/user/password'>
             <div className='s1'>
             <FontAwesomeIcon icon={faLock} />
-              <span>Change Password</span>
+              <span>Password</span>
             </div>
           </Link>
       }

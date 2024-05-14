@@ -1,40 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/AccountSettings.css";
 import "../../styles/homepage.css";
+import useAuth from "hooks/useAuth.js";
+import axios from "api/axios.js";
 
-function FollowedCommunities({ user }) {
-  console.log("User data received in FollowedCommunities:", user);
+function FollowedCommunities() {
+  const { auth } = useAuth();
+  const userId = auth._id;
+  const [user, setUser] = useState({});
 
-  if (!user) {
-    console.log("No user data available.");
-    return <div>No user data available</div>;
+  const [communities, setCommunities] = useState([]);
+
+  useEffect(() => {
+    axios.get(`/users/${userId}`).then((res) => {
+      setUser(res.data);
+    }
+    );
+  }, []);
+
+
+  useEffect(() => {
+    axios.get(`/users/${userId}/communities`).then((res) => {
+      setCommunities(res.data);
+    }
+    );
   }
+    , []);
 
-  const { followedCommunities } = user;
 
   return (
     <>
       <div className="posts_head">
-        <div className="posts_topic">Community</div>
+        <div className="posts_topic">Community Name</div>
         <div className="Community_status">Status</div>
-        <div className="posts_category">Tags</div>
+        <div className="posts_category">Owner</div>
         <div className="posts_replies">Posts</div>
         <div className="posts_views">Members</div>
       </div>
       <div className="inner-left">
-        {followedCommunities.length > 0 ? (
-          followedCommunities.map((community, index) => (
-            <div key={index} className="community-item">
-              <div className="community-name">{community}</div>
-              <div className="community-status">Active</div>
-              <div className="community-tags">General</div>
-              <div className="community-posts">10</div>
-              <div className="community-members">100</div>
-            </div>
-          ))
-        ) : (
+        {communities.length > 0 ? communities.map((community) => (
+          <div className="posts_head">
+            <div className="posts_topic">{community.name}</div>
+            <div className="Community_status">  {community.isPrivate ? 'Private' : 'Public'}</div>
+            <div className="posts_category">{community.owner.username}</div>
+            <div className="posts_replies">{community.postCount}</div>
+            <div className="posts_views">{community.memberCount}</div>
+          </div>
+        )) :
           <div>No followed communities</div>
-        )}
+        }
+
       </div>
     </>
   );

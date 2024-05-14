@@ -20,14 +20,15 @@ public class Post {
     @Id
     private String _id;
     private String username;
+    private String userId;
     private String title;
     private String body;
     private String communityId;
     private int upVotes;
     private int downVotes;
     private int commentCount;
-    private List<Template> templates;
-    private List<Comment> comments;
+    private List<Template> templates = List.of();
+    private List<Comment> comments = List.of();
     @CreatedDate
     private Date createdAt;
     @LastModifiedDate

@@ -19,7 +19,7 @@ import PostTableElement from "components/Post/PostTableElement.js";
 function formatDate(timestamp) {
   const date = new Date(timestamp);
   const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 }
@@ -61,7 +61,7 @@ function CommunityComponent() {
     window.location.href = '/community/settings/kickuser';
   }
 
-   const createTemplate = () => {
+  const createTemplate = () => {
     window.location.href = '/community/createTemplate';
   }
 
@@ -101,7 +101,7 @@ function CommunityComponent() {
                       <span>posts</span>
                     </div>
                     <div>
-                      <h4>{community.memberCount + 1}</h4>
+                      <h4>{community.memberCount}</h4>
                       <span>members</span>
                     </div>
                   </div>
@@ -117,7 +117,7 @@ function CommunityComponent() {
                   </div>
                   <div className="buttons">
                     <a href="#" className="btn btn-red" onClick={createTemplate}>
-                    <FontAwesomeIcon icon={faSliders} /> Create  Template
+                      <FontAwesomeIcon icon={faSliders} /> Create  Template
                     </a>
                   </div>
                   <div className="buttons">
@@ -168,7 +168,7 @@ function CommunityComponent() {
                       </div>
                       <div className="details">
                         <a href="#">{member.username}</a>
-                        <span>{community.postCount} Posts</span>
+                        <span>{community.posts.filter(x => x.userId == member._id).length} Posts</span>
                       </div>
                     </div>
                   ))}

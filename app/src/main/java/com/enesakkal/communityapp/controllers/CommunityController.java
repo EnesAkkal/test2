@@ -72,9 +72,11 @@ public class CommunityController {
         newCommunity.setDescription(community.getDescription());
         newCommunity.setPrivate(Boolean.parseBoolean(community.getIsPrivate()));
         newCommunity.setOwner(owner);
+        newCommunity.setMembers(List.of(owner));
         newCommunity.setTags(List.of(community.getTags()));
         newCommunity.setCreatedAt(new Date());
         newCommunity.setLastModifiedDate(new Date());
+        newCommunity.setMemberCount(1);
         return ResponseEntity.ok(communityService.putCommunity(newCommunity));
     }
 
@@ -98,6 +100,7 @@ public class CommunityController {
             throw new RuntimeException("Community not found");
         }
         post.setCommunityId(community.get_id());
+        post.setCreatedAt(new Date());
         Post newPost = postService.createPost(post);
 
         // update the post count of the community
@@ -120,5 +123,6 @@ public class CommunityController {
         communityService.leaveCommunity(userId, id);
         return ResponseEntity.ok("User left community successfully");
     }
+
 
 }

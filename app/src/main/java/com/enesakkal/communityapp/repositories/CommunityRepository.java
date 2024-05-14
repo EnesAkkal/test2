@@ -22,4 +22,6 @@ public interface CommunityRepository extends MongoRepository<Community, String> 
     List<Community> findAllByNameContaining(String filter);
 
     void deleteAll();
+
+    List<Community> findAllBy_id(List<String> ids);
 }

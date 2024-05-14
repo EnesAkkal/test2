@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/AccountSettings.css";
+import axios from "api/axios.js";
+import useAuth from "hooks/useAuth.js";
 
 const AccountSettings = () => {
+
+  const { auth } = useAuth();
+  const userId = auth._id;
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    axios.get(`/users/${userId}`).then((res) => {
+      setUser(res.data);
+    }
+    );
+  }, []);
+
+
   return (
     <>
       <div className="accountsettings">
@@ -9,34 +24,19 @@ const AccountSettings = () => {
         <div className="form">
           <div className="form-group">
             <label htmlFor="name">
-              Your Name <span>*</span>
+              <span>Username</span>
             </label>
-            <input type="text" name="name" id="name" />
+            <input type="text" value={user.username} id="username" />
           </div>
 
           <div className="form-group">
-            <label htmlFor="surname">
-              Your Surname <span>*</span>
+            <label htmlFor="email">
+              <span>Email</span>
             </label>
-            <input type="text" name="surname" id="surname" />
+            <input type="text" value={user.email} id="email" />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="Phone">
-              Your Phone Number <span>*</span>
-            </label>
-            <input type="number" name="number" id="number" />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="Location">
-              Location <span>*</span>
-            </label>
-            <input type="Location" name="Location" id="Location" />
-          </div>
         </div>
-
-        <button className="mainbutton1">Save Changes</button>
       </div>
     </>
   );

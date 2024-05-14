@@ -7,11 +7,8 @@ function PostTableElement({ post }) {
     console.log("Post data received:", post); // Debugging: Log the entire post object
     const { username, title, body, upVotes, commentCount, createdAt } = post;
 
-    // Check if createdAt is valid and format the date
-    const formattedDate = createdAt ? format(new Date(createdAt), 'PPpp') : 'ssd';
-
-    console.log("Formatted date:", formattedDate); // Debugging: Log the formatted date
-
+    // Format the createdAt date using the format function
+    const formattedDate = format(new Date(createdAt), 'MMMM d, yyyy');
     return (
         <div className="post-info-area">
             <p>by {username} on {formattedDate}</p>

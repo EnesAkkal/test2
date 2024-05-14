@@ -8,7 +8,7 @@ const CommunityTableElement = ({ community }) => {
     const { _id, name, tags, postCount, memberCount } = community;
     const { auth } = useAuth();
     const userId = auth._id;
-    
+
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -48,19 +48,21 @@ const CommunityTableElement = ({ community }) => {
         }
     }
 
-    
 
-    return (<div className="posts_head1">
-        <div className="posts_topic"  onClick={(e) => handleClick(_id, e)}>
-            <h3>{name}</h3>
-        </div>
-        <div className="posts_category">
-            <p>{tags[0]}</p>
-        </div>
-        <div className="posts_replies">{postCount}</div>
-        <div className="posts_views">{memberCount+1}</div>
-        <div className="posts_posts"><FontAwesomeIcon icon={faPlus} onClick={handleSubmit} /></div>
-    </div>)
+
+    return (
+        <div className="posts_head1">
+            <div className="posts_topic" onClick={(e) => handleClick(_id, e)}>
+                <h3>{name}</h3>
+            </div>
+            <div className="posts_category">
+                <p>{tags[0]}</p>
+            </div>
+            <div className="posts_replies">{postCount}</div>
+            <div className="posts_views">{memberCount}</div>
+            <div className="posts_posts"><FontAwesomeIcon icon={faPlus} onClick={handleSubmit} />
+            </div>
+        </div>)
 }
 
 export default CommunityTableElement;
