@@ -516,10 +516,16 @@ main {
   main .right .first .stats div:first-of-type {
     border-right: 0.1rem solid var(--mediumGray);
     padding-right: 2.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   main .right .first .stats div:last-of-type {
     margin-left: 2.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   main .right .first .stats div h4 {
@@ -913,6 +919,7 @@ main {
       flex-shrink: 0;
       width: 30rem;
       margin-left: 5%;
-      padding-top: 6.4rem;
+      padding-top: 10.4rem;
+      
     }
   }

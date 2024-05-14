@@ -6,7 +6,7 @@ import "../../styles/UserProfile.css";
 import HeaderComponent from "../HeaderComponent.js";
 import FooterComponent from "../FooterComponent.js";
 import ChangePassword from "../UserProfile/ChangePassword.js";
-import ChangeMail from "./ChangeMail.js";
+import FollowedCommunities from "./FollowedCommunities.js";
 import ChangeNickname from "./ChangeNickname.js";
 
 const UserProfile = () => {
@@ -27,7 +27,7 @@ const UserProfile = () => {
           <div className="right">
             {activepage === "accountsettings" && <AccountSettings />}
             {activepage === "changepassword" && <ChangePassword />}
-            {activepage === "changemail" && <ChangeMail />}
+            {activepage === "followedcommunities" && <FollowedCommunities />}
             {activepage === "changenickname" && <ChangeNickname />}
             
           </div>

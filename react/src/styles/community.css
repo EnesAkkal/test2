@@ -2,15 +2,15 @@
   width: 100%;
   height: auto;
   background-color: var(--whiteColor);
-  border: 1px solid black;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
   border-radius: 0.7rem;
   margin-bottom: 0.9rem;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 20px;
+  display: flex;
 }
 
 .posts ul {
@@ -57,6 +57,8 @@
   align-items: center;
   display: flex;
   margin-top: 10px;
+  text-decoration: underline;
+  font-size: large;
 }
 
 .reactions {
@@ -87,7 +89,7 @@
 }
 
 .post-info-area {
-  
+  width: 100%;
 }
 
 .post-info-area p {

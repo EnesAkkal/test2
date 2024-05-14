@@ -17,7 +17,7 @@ public class PostService {
     }
 
     public String getPostById(String id) {
-        return repository.findById(id).orElseThrow().getTitle();
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found")).getTitle();
     }
 
     public void deletePostById(String id) {
@@ -28,27 +28,25 @@ public class PostService {
         return repository.existsByTitle(title);
     }
 
-    
-
     public Post createPost(Post post) {
-        
         return repository.save(post);
     }
 
     public List<Comment> getComments(String id) {
-        return repository.findById(id).orElseThrow().getComments();
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found")).getComments();
     }
 
     public List<Template> getTemplates(String id) {
-        return repository.findById(id).orElseThrow().getTemplates();
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found")).getTemplates();
     }
+
     // Read operation
     public List<Post> getAllPosts() {
         return repository.findAll();
     }
 
     public Post updatePost(String id, Post post) {
-        Post existingPost = repository.findById(id).orElseThrow();
+        Post existingPost = repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         existingPost.setTitle(post.getTitle());
         existingPost.setBody(post.getBody());
         existingPost.setCommunityId(post.getCommunityId());
@@ -57,11 +55,11 @@ public class PostService {
         existingPost.setCommentCount(post.getCommentCount());
         existingPost.setTemplates(post.getTemplates());
         existingPost.setComments(post.getComments());
+        // Do not set createdAt and lastModifiedDate manually
         return repository.save(existingPost);
     }
 
     public void deleteAllPosts() {
         repository.deleteAll();
     }
-
 }

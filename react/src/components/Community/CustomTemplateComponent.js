@@ -4,12 +4,10 @@ import HeaderComponent from '../HeaderComponent.js';
 import FooterComponent from '../FooterComponent.js';
 import axios from "api/axios.js";
 
-
-
 function CustomTemplateComponent() {
-  const [inputList, setInputList] = useState([{ name: "", dataType: "Text" }]);
+  const [inputList, setInputList] = useState([{ name: "", dataType: "Text", value: "" }]);
   const [templateName, setTemplateName] = useState("");
-
+  const [fieldTypes] = useState(["Text", "Number", "Date", "Image", "Geolocation"]);
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -25,7 +23,7 @@ function CustomTemplateComponent() {
   };
 
   const handleAddClick = () => {
-    setInputList([...inputList, { name: "", dataType: "Text" }]);
+    setInputList([...inputList, { name: "", dataType: "Text", value: "" }]);
   };
 
   const handleTemplateNameChange = (e) => {
@@ -47,6 +45,28 @@ function CustomTemplateComponent() {
     }
   };
 
+  const handleGeolocation = (index) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const list = [...inputList];
+        list[index].value = `${position.coords.latitude},${position.coords.longitude}`;
+        setInputList(list);
+      }, (error) => {
+        alert("Geolocation error: " + error.message);
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  };
+
+  const handleDataTypeChange = (e, index) => {
+    const { value } = e.target;
+    const list = [...inputList];
+    list[index].dataType = value;
+    list[index].value = ""; // Reset the value when the data type changes
+    setInputList(list);
+  };
+
   return (
     <>
     <HeaderComponent/>
@@ -58,10 +78,10 @@ function CustomTemplateComponent() {
             </div>
             <div className="template_FormContainer">
             <form className="form1">
-          <label for="template_name">Template Name</label>
-          <textarea id="template" name="template" rows="1"></textarea>
-           </form>
-           </div>
+              <label htmlFor="template_name">Template Name</label>
+              <textarea id="template" name="template" rows="1" onChange={handleTemplateNameChange}></textarea>
+            </form>
+            </div>
             {inputList.map((item, index) => (
               <div key={index} className="data-fields">
                 <div className="flex-row">
@@ -81,14 +101,68 @@ function CustomTemplateComponent() {
                     id={`dataType-${index}`}
                     name="dataType"
                     value={item.dataType}
-                    onChange={e => handleInputChange(e, index)}
+                    onChange={e => handleDataTypeChange(e, index)}
                   >
-                    <option value="Text">Text</option>
-                    <option value="TextArea">TextArea</option>
-                    <option value="Number">Number</option>
-                    <option value="Photo">Photo</option>
-                    <option value="File">File</option>
+                    {fieldTypes.map((type) => (
+                      <option key={type} value={type}>{type}</option>
+                    ))}
                   </select>
+                </div>
+                <div className="flex-row">
+                  <label htmlFor={`input-${index}`}>Input</label>
+                  {item.dataType === "Text" && (
+                    <input
+                      type="text"
+                      id={`input-${index}`}
+                      name="value"
+                      value={item.value}
+                      onChange={e => handleInputChange(e, index)}
+                      placeholder="Enter Text"
+                    />
+                  )}
+                  {item.dataType === "Number" && (
+                    <input
+                      type="number"
+                      id={`input-${index}`}
+                      name="value"
+                      value={item.value}
+                      onChange={e => handleInputChange(e, index)}
+                      placeholder="Enter Number"
+                    />
+                  )}
+                  {item.dataType === "Date" && (
+                    <input
+                      type="date"
+                      id={`input-${index}`}
+                      name="value"
+                      value={item.value}
+                      onChange={e => handleInputChange(e, index)}
+                    />
+                  )}
+                  {item.dataType === "Image" && (
+                    <input
+                      type="file"
+                      id={`input-${index}`}
+                      name="value"
+                      onChange={e => handleInputChange(e, index)}
+                      accept="image/*"
+                    />
+                  )}
+                  {item.dataType === "Geolocation" && (
+                    <div>
+                      <input
+                        type="text"
+                        id={`input-${index}`}
+                        name="value"
+                        value={item.value}
+                        onChange={e => handleInputChange(e, index)}
+                        placeholder="Latitude,Longitude"
+                      />
+                      <button type="button" onClick={() => handleGeolocation(index)}>
+                        Use Current Location
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="flex-row">
                   {inputList.length !== 1 && (
@@ -104,8 +178,8 @@ function CustomTemplateComponent() {
                     </button>
                     
                   )}
-                         {inputList.length - 1 === index && (
-                    <button  className='btn btn-red'>
+                  {inputList.length - 1 === index && (
+                    <button className='btn btn-red' onClick={handleSaveTemplate}>
                       <p> Save Template</p>
                     </button>
                     

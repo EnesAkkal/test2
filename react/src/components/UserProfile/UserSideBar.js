@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock,faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock,faEnvelope,faHouseUser } from '@fortawesome/free-solid-svg-icons';
 import "../../styles/UserSideBar.css";
 
 const UserSideBar = ({ activepage }) => {
@@ -39,7 +39,7 @@ const UserSideBar = ({ activepage }) => {
 
           :
           <Link
-            to='/user/changepassword' className='stylenone'>
+            to='/user/changepassword'>
             <div className='s1'>
             <FontAwesomeIcon icon={faLock} />
               <span>Change Password</span>
@@ -48,18 +48,18 @@ const UserSideBar = ({ activepage }) => {
       }
 
       {
-        activepage === 'changemail' ?
+        activepage === 'followedCommunities' ?
           <div className='s2'>
-            <FontAwesomeIcon icon={faEnvelope} />
-            <span>Change Email</span>
+            <FontAwesomeIcon icon={faHouseUser} />
+            <span>Followed Communties</span>
           </div>
 
           :
           <Link
-            to='/user/changemail' className='stylenone'>
+            to='/user/followedcommunities'>
             <div className='s1'>
-            <FontAwesomeIcon icon={faEnvelope} />
-              <span>Change Email</span>
+            <FontAwesomeIcon icon={faHouseUser} />
+            <span>Followed Communties</span>
             </div>
           </Link>
       }
@@ -75,7 +75,7 @@ const UserSideBar = ({ activepage }) => {
 
           :
           <Link
-            to='/user/changenickname' className='stylenone'>
+            to='/user/changenickname'>
             <div className='s1'>
             
 

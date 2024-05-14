@@ -24,22 +24,22 @@ function Post() {
   });
 
   const [errors, setErrors] = useState({});
-  const [template, setTemplate] = useState('Default Template'); // State to manage template selection
+  const [template, setTemplate] = useState('Default Template'); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let newErrors = {};
-    // Validate required fields
+
     if (!post.title.trim()) newErrors.title = "Title is required.";
     if (!post.tags.length) newErrors.tags = "At least one tag is required.";
     if (!post.body.trim()) newErrors.body = "Description is required.";
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors); // Set errors state if validation fails
+      setErrors(newErrors); 
       return;
     }
 
-    // If no errors, proceed with API call
+
     axios.post("/community/" + id + "/createpost", post)
       .then((response) => {
         console.log(response.data);
@@ -56,7 +56,7 @@ function Post() {
     if (name === "tags") {
       setPost(prevPost => ({
         ...prevPost,
-        tags: value.split(",").map(tag => tag.trim()) // Split tags and trim whitespace
+        tags: value.split(",").map(tag => tag.trim()) 
       }));
     } else {
       setPost(prevPost => ({
@@ -66,7 +66,7 @@ function Post() {
     }
     setErrors(prevErrors => ({
       ...prevErrors,
-      [name]: "" // Clear errors as user types
+      [name]: ""
     }));
   };
 
@@ -98,6 +98,11 @@ function Post() {
                     <label htmlFor="title">Title</label>
                     <textarea id="title" name="title" rows="1" onChange={handleChange} value={post.title}></textarea>
                     {errors.title && <div className="error">{errors.title}</div>}
+
+                    
+                <label htmlFor="tags">Tags</label>
+                <textarea id="tags" name="tags" rows="1" onChange={handleChange} value={post.tags.join(",")}></textarea>
+                {errors.tags && <div className="error">{errors.tags}</div>}
 
                     <label htmlFor="body">Description</label>
                     <textarea id="body" name="body" rows="2" onChange={handleChange} value={post.body}></textarea>
@@ -140,13 +145,9 @@ function Post() {
                      <textarea id="title" name="title" rows="1" onChange={handleChange} value={post.title}></textarea>
                      {errors.title && <div className="error">{errors.title}</div>}
  
-                     <label htmlFor="tags">Tags</label>
-                     <textarea id="tags" name="tags" rows="1" onChange={handleChange} value={post.tags.join(",")}></textarea>
-                     {errors.tags && <div className="error">{errors.tags}</div>}
- 
                      <label htmlFor="body">Description</label>
-                     <textarea id="body" name="body" rows="2" onChange={handleChange} value={post.body}></textarea>
-                     {errors.body && <div className="error">{errors.body}</div>}
+                <textarea id="body" name="body" rows="2" onChange={handleChange} value={post.body}></textarea>
+                {errors.body && <div className="error">{errors.body}</div>}
  
                      <input type="submit" value="Create Post" />
                    </form>

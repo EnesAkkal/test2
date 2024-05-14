@@ -23,6 +23,9 @@ function HeaderComponent() {
     window.location.href = '/community/createpage';
   }
 
+  const goBack = () => {
+    window.history.back();
+  }
 
   return (
     <header className="header" id="header">
@@ -30,11 +33,11 @@ function HeaderComponent() {
         <div className="homefeed-container">
           <div className="header-content">
             <SearchBar />
+            <div className='home'>
+                  <FontAwesomeIcon icon={faArrowLeft} className='home' onClick={goBack} />
+                </div>
             <div className="nav-group">
               <ul>
-                <div className='home'>
-                  <FontAwesomeIcon icon={faArrowLeft} className='home' />
-                </div>
                 <div className="home">
                   <a onClick={home}> <FontAwesomeIcon icon={faHome} className='home' /> </a>
                 </div>
