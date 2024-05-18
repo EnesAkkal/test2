@@ -97,7 +97,7 @@ public class CommunityController {
         return ResponseEntity.ok(communities);
     }
 
-    @GetMapping("/{id}/leave")
+    @PostMapping("/{id}/leave")
     public ResponseEntity<String> leaveCommunity(@RequestParam String userId, @PathVariable String id) {
         communityService.leaveCommunity(userId, id);
         return ResponseEntity.ok("User left community successfully");

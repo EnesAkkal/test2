@@ -92,26 +92,24 @@ function CommunityComponent() {
     window.location.href = '/community/' + id + '/template';
   }
 
+  
   const leaveCommunity = () => {
-    if (!auth || !auth.user || !auth.user._id) {
-      alert("User not authenticated.");
-      return;
-    }
-
-    const userId = auth.user._id; 
-    console.log(`Leaving community with userId: ${userId}`); 
-
-    axios.get(`/community/${id}/leave`, { params: { userId } })
-      .then(response => {
+    const userId = auth._id;
+    const communityId = community._id;
+  
+    axios.post(`/community/${communityId}/leave`, { userId })
+      .then((response) => {
         console.log(response.data);
-        alert("You have left the community successfully.");
-      
+        window.location.href = '/';
       })
-      .catch(error => {
-        console.error("There was an error leaving the community!", error);
-        alert("Failed to leave the community.");
+      .catch((error) => {
+        console.error('There was an error leaving the community!', error);
+        alert('Failed to leave the community.');
       });
-  }
+  };
+  
+
+  
 
   return (
     <>
