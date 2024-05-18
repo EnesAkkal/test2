@@ -1,4 +1,5 @@
 import { Component, useEffect, useState } from "react";
+import {useParams } from "react-router-dom";
 import "../../styles/homepage.css";
 import "../../styles/community.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,8 +14,8 @@ import pp1 from "../../assets/pp1.jpg";
 import FooterComponent from "../../components/FooterComponent.js";
 import HeaderComponent from "../../components/HeaderComponent.js";
 import axios from "../../api/axios.js";
-import { useParams } from "react-router-dom";
 import PostTableElement from "components/Post/PostTableElement.js";
+import useAuth from "../../hooks/useAuth.js"; 
 
 function formatDate(timestamp) {
   const date = new Date(timestamp);
@@ -24,10 +25,9 @@ function formatDate(timestamp) {
   return `${day}/${month}/${year}`;
 }
 
-
 function CommunityComponent() {
-
   const { id } = useParams();
+  const { auth } = useAuth(); 
   const [community, setCommunity] = useState({
     _id: id,
     name: "Community Name",
@@ -74,7 +74,7 @@ function CommunityComponent() {
       setCommunity(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [id]);
 
   const handleCommunity = () => {
     window.location.href = '/community/createpage';
@@ -90,6 +90,27 @@ function CommunityComponent() {
 
   const createTemplate = () => {
     window.location.href = '/community/' + id + '/template';
+  }
+
+  const leaveCommunity = () => {
+    if (!auth || !auth.user || !auth.user._id) {
+      alert("User not authenticated.");
+      return;
+    }
+
+    const userId = auth.user._id; 
+    console.log(`Leaving community with userId: ${userId}`); 
+
+    axios.get(`/community/${id}/leave`, { params: { userId } })
+      .then(response => {
+        console.log(response.data);
+        alert("You have left the community successfully.");
+      
+      })
+      .catch(error => {
+        console.error("There was an error leaving the community!", error);
+        alert("Failed to leave the community.");
+      });
   }
 
   return (
@@ -120,7 +141,6 @@ function CommunityComponent() {
                   <h3>{community.name}</h3>
                   <span>Created On: {formatDate(community.createdAt)}</span>
                   <p>
-
                     {community.description}
                   </p>
                   <div className="stats">
@@ -145,24 +165,24 @@ function CommunityComponent() {
                   </div>
                   <div className="buttons">
                     <a href="#" className="btn btn-red" onClick={createTemplate}>
-                      <FontAwesomeIcon icon={faSliders} /> Create  Template
+                      <FontAwesomeIcon icon={faSliders} /> Create Template
                     </a>
                   </div>
                   <div className="buttons">
-                    <a href="#" className="btn btn-red" onClick={handleCommunity}>
+                    <a href="#" className="btn btn-red" onClick={leaveCommunity}>
                       <FontAwesomeIcon icon={faArrowRightFromBracket} /> Leave from the Community
                     </a>
                   </div>
                 </div>
                 <div className="box recommended-communities">
-                  <h3>Owner </h3>
+                  <h3>Owner</h3>
                   <div className="inner-box">
                     <div className="img">
                       <img src={pp1} alt="" />
                     </div>
                     <div className="details">
                       <a href="#">{community.owner.username}</a>
-                      <span>{community.postCount} Posts</span>
+                      <span>{community.owner.postCount} Posts</span>
                     </div>
                   </div>
                 </div>
@@ -172,17 +192,16 @@ function CommunityComponent() {
                     View All <FontAwesomeIcon icon={faArrowRight} />
                   </a>
                   {community.moderators.map((moderator) => (
-                    <div className="inner-box">
+                    <div className="inner-box" key={moderator._id}>
                       <div className="img">
                         <img src={pp1} alt="" />
                       </div>
                       <div className="details">
-                        <a href="#">moderator.username</a>
+                        <a href="#">{moderator.username}</a>
                         <span>202 replies</span>
                       </div>
                     </div>
                   ))}
-
                 </div>
                 <div className="box community-info">
                   <h3> Member List</h3>
@@ -190,22 +209,20 @@ function CommunityComponent() {
                     View All <FontAwesomeIcon icon={faArrowRight} />
                   </a>
                   {community.members.map((member) => {
-                    console.log("member",member);
+                    console.log("member", member);
                     return (
-                      <div className="inner-box">
+                      <div className="inner-box" key={member._id}>
                         <div className="img">
                           <img src={pp1} alt="" />
                         </div>
                         <div className="details">
                           <a href="#">{member.username}</a>
-                          <span>{community.posts.filter(x => x.userId == member._id).length} Posts</span>
+                          <span>{community.posts.filter(x => x.userId === member._id).length} Posts</span>
                         </div>
                       </div>
                     )
                   })}
-
                 </div>
-
               </section>
             </div>
           </div>

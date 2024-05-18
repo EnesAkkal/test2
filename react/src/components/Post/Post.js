@@ -118,7 +118,7 @@ function Post() {
                   } />
                 </div>
               ))}
-              <button className="btn btn-red" onClick={() => createPost()}>Submit</button>
+              <button className="btn btn-red" onClick={() => createPost()}>Create Post</button>
 
 
             </div>

@@ -42,7 +42,6 @@ public class PostService {
         existingPost.setUpVotes(post.getUpVotes());
         existingPost.setDownVotes(post.getDownVotes());
         existingPost.setComments(post.getComments());
-        // Do not set createdAt and lastModifiedDate manually
         return repository.save(existingPost);
     }
 

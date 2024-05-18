@@ -132,7 +132,12 @@
   margin-bottom: 20px;
 }
 
+.post-info-areaa{
+  margin-bottom: 100px;
+  flex-direction: column;
+  display: flex;
+}
 
-
-/*  COMMENT AREA */
-
+.post-infos{
+  font-size: 16px;
+}

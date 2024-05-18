@@ -1,6 +1,4 @@
-
 import { format } from 'date-fns';
-
 import { RenderText, RenderNumber, RenderDate, RenderImage, RenderGeo } from './PostTemplate.js';
 
 
@@ -10,18 +8,20 @@ function PostTableElement({ post }) {
     const { templateName, fieldsNames, fieldsTypes, fieldsValues, userId } = template;
     console.log("post", post)
 
+    
+
 
     return (
         <tr>
-          <div>
-            <td> Posted By {username}</td>
+          <div className='post-info-areaa'>
+            <td className='post-infos'> Posted By {username} on {formattedDate}</td>
+            <td className='post-infos'> Template Name: {templateName}</td>
             </div>
-            <td> Template Name: {templateName}</td>
             {fieldsTypes.map((fieldType, index) => {
            
                 return (
                     <div>
-                        <p>Content of the post</p>
+                        
                     <div key={index}>
 
                         {fieldType === 'text' && <RenderText text={fieldsValues[index]} />}
@@ -35,8 +35,7 @@ function PostTableElement({ post }) {
 
 
             })}
-            <td>{formattedDate}</td>
-          
+           
         </tr>
     );
 

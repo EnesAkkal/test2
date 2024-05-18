@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const CREATE_URL = "/community/create";
 
 function CreateCommunityComponent() {
-  const { auth } = useAuth(); // Custom authentication hook to access user authentication status and data.
+  const { auth } = useAuth(); 
   const [community, setCommunity] = useState({
     ownerId: auth._id,
     description: "",
