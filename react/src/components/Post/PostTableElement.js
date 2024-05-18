@@ -1,33 +1,45 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faComment } from '@fortawesome/free-solid-svg-icons';
-import { format } from 'date-fns'; // Import the format function from date-fns
+
+import { format } from 'date-fns';
+
+import { RenderText, RenderNumber, RenderDate, RenderImage, RenderGeo } from './PostTemplate.js';
+
 
 function PostTableElement({ post }) {
-    console.log("Post data received:", post); // Debugging: Log the entire post object
-    const { username, title, body, upVotes, commentCount, createdAt } = post;
-
-    // Format the createdAt date using the format function
+    const { _id, username, template, upVotes, downVotes, comments, createdAt, lastModificationDate } = post;
     const formattedDate = format(new Date(createdAt), 'MMMM d, yyyy');
+    const { templateName, fieldsNames, fieldsTypes, fieldsValues, userId } = template;
+    console.log("post", post)
+
+
     return (
-        <div className="post-info-area">
-            <p>by {username} on {formattedDate}</p>
-            <div className="post-title">
-                <h3>{title}</h3>
+        <tr>
+          <div>
+            <td> Posted By {username}</td>
             </div>
-            <div className="post-content">
-                <p>{body}</p>
-                <div className="reactions">
-                    <a>
-                        {upVotes} <FontAwesomeIcon icon={faThumbsUp} className="icons" />
-                    </a>
-                    <a>
-                        {commentCount} <FontAwesomeIcon icon={faComment} className="icons" />
-                    </a>
-                </div>
-            </div>
-        </div>
+            <td> Template Name: {templateName}</td>
+            {fieldsTypes.map((fieldType, index) => {
+           
+                return (
+                    <div>
+                        <p>Content of the post</p>
+                    <div key={index}>
+
+                        {fieldType === 'text' && <RenderText text={fieldsValues[index]} />}
+                        {fieldType === 'Number' && <RenderNumber number={fieldsValues[index]} />}
+                        {fieldType === 'Date' && <RenderDate date={fieldsValues[index]} />}
+                        {fieldType === 'Image' && <RenderImage src={fieldsValues[index]} />}
+                        {fieldType === 'Geolocation' && <RenderGeo geo={fieldsValues[index]} />}
+                    </div>
+                    </div>
+                );
+
+
+            })}
+            <td>{formattedDate}</td>
+          
+        </tr>
     );
+
 }
 
 export default PostTableElement;

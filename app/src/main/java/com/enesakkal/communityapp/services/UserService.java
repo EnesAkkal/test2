@@ -1,6 +1,5 @@
 package com.enesakkal.communityapp.services;
 
-import com.enesakkal.communityapp.models.community.Community;
 import com.enesakkal.communityapp.models.user.User;
 import com.enesakkal.communityapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -56,4 +55,7 @@ public class UserService {
         return repository.existsByUsername(username);
     }
 
+    public void deleteAllUsers() {
+        repository.deleteAll();
+    }
 }

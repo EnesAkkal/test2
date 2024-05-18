@@ -10,11 +10,8 @@ import java.util.Optional;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
     // this method may or may not return post object
-    Optional<Post> findByTitle(String title);
     Boolean existsByCreatedAt(Date createdAt);
     Optional<Post> findBy_id(String id);
-    Boolean existsByTitle(String title);
     Boolean existsBy_id(String id);
-    List<Post> findAllByCommunityId(String communityId);
 
 }

@@ -1,198 +1,124 @@
 import React, { useState } from 'react';
-import "../../styles/customtemplate.css"; 
+import "../../styles/customtemplate.css";
 import HeaderComponent from '../HeaderComponent.js';
 import FooterComponent from '../FooterComponent.js';
 import axios from "api/axios.js";
+import { set } from 'date-fns';
+import useAuth from 'hooks/useAuth.js';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function CustomTemplateComponent() {
-  const [inputList, setInputList] = useState([{ name: "", dataType: "Text", value: "" }]);
-  const [templateName, setTemplateName] = useState("");
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [fieldTypes] = useState(["Text", "Number", "Date", "Image", "Geolocation"]);
+  const { auth } = useAuth();
+  const [template, setTemplate] = useState({
+    "userId": auth._id,
+    "templateName": "Default",
+    "fieldsNames": [
+      "name",
+      "description"
+    ],
+    "fieldsTypes": [
+      "text",
+      "text"
+    ],
+    "fieldsValues": [
+      "Post Name",
+      "Post Description"
+    ],
+    "createdAt": 1640995200000,
+    "lastModifiedDate": 1640995200000
+  },
+  );
 
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-  };
 
-  const handleRemoveClick = index => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-  };
+  const addField = () => {
+    setTemplate({
+      ...template,
+      fieldsNames: [...template.fieldsNames, "new field"],
+      fieldsTypes: [...template.fieldsTypes, "text"],
+      fieldsValues: [...template.fieldsValues, "new field"]
+    });
+  }
 
-  const handleAddClick = () => {
-    setInputList([...inputList, { name: "", dataType: "Text", value: "" }]);
-  };
+  const removeField = (index) => {
 
-  const handleTemplateNameChange = (e) => {
-    setTemplateName(e.target.value);
-  };
+    setTemplate({
+      ...template,
+      fieldsNames: template.fieldsNames.filter((_, i) => i !== index),
+      fieldsTypes: template.fieldsTypes.filter((_, i) => i !== index),
+      fieldsValues: template.fieldsValues.filter((_, i) => i !== index)
+    });
+  }
 
-  const handleSaveTemplate = async () => {
-    if (!templateName) {
-      alert("Please enter a template name.");
-      return;
-    }
+  const handleFieldChange = (index, event) => {
+    const newFieldsValues = [...template.fieldsValues];
+    newFieldsValues[index] = event.target.value;
+    setTemplate({
+      ...template,
+      fieldsValues: newFieldsValues
+    });
+  }
+
+  const handleFieldNameChange = (index, event) => {
+    const newFieldsNames = [...template.fieldsNames];
+    newFieldsNames[index] = event.target.value;
+    setTemplate({
+      ...template,
+      fieldsNames: newFieldsNames
+    });
+  }
+
+  const handleFieldTypeChange = (index, event) => {
+    const newFieldsTypes = [...template.fieldsTypes];
+    newFieldsTypes[index] = event.target.value;
+    setTemplate({
+      ...template,
+      fieldsTypes: newFieldsTypes
+    });
+  }
+
+  const saveTemplate = async () => {
     try {
-      const response = await axios.post('/api/templates', { name: templateName, fields: inputList });
-      console.log(response.data);
-      alert('Template saved successfully!');
+      await axios.post("/community/" + id + "/template", template);
+      alert("Template saved successfully.");
+      navigate("/community/" + id);
     } catch (error) {
-      console.error('Failed to save template:', error);
-      alert('Error saving template.');
+      console.error(error);
+      alert("Failed to save template.");
     }
-  };
-
-  const handleGeolocation = (index) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const list = [...inputList];
-        list[index].value = `${position.coords.latitude},${position.coords.longitude}`;
-        setInputList(list);
-      }, (error) => {
-        alert("Geolocation error: " + error.message);
-      });
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  };
-
-  const handleDataTypeChange = (e, index) => {
-    const { value } = e.target;
-    const list = [...inputList];
-    list[index].dataType = value;
-    list[index].value = ""; // Reset the value when the data type changes
-    setInputList(list);
-  };
+  }
 
   return (
-    <>
-    <HeaderComponent/>
-      <div className="root">
-        <div className="post-container">
-          <div className="column">
-            <div className="title">
-              <h2>Customize Template</h2>
-            </div>
-            <div className="template_FormContainer">
-            <form className="form1">
-              <label htmlFor="template_name">Template Name</label>
-              <textarea id="template" name="template" rows="1" onChange={handleTemplateNameChange}></textarea>
-            </form>
-            </div>
-            {inputList.map((item, index) => (
-              <div key={index} className="data-fields">
-                <div className="flex-row">
-                  <label htmlFor={`name-${index}`}>Field Name</label>
-                  <input
-                    type="text"
-                    id={`name-${index}`}
-                    name="name"
-                    value={item.name}
-                    onChange={e => handleInputChange(e, index)}
-                    placeholder="Enter Field Name"
-                  />
-                </div>
-                <div className="flex-row">
-                  <label htmlFor={`dataType-${index}`}>Data Type</label>
-                  <select
-                    id={`dataType-${index}`}
-                    name="dataType"
-                    value={item.dataType}
-                    onChange={e => handleDataTypeChange(e, index)}
-                  >
-                    {fieldTypes.map((type) => (
-                      <option key={type} value={type}>{type}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex-row">
-                  <label htmlFor={`input-${index}`}>Input</label>
-                  {item.dataType === "Text" && (
-                    <input
-                      type="text"
-                      id={`input-${index}`}
-                      name="value"
-                      value={item.value}
-                      onChange={e => handleInputChange(e, index)}
-                      placeholder="Enter Text"
-                    />
-                  )}
-                  {item.dataType === "Number" && (
-                    <input
-                      type="number"
-                      id={`input-${index}`}
-                      name="value"
-                      value={item.value}
-                      onChange={e => handleInputChange(e, index)}
-                      placeholder="Enter Number"
-                    />
-                  )}
-                  {item.dataType === "Date" && (
-                    <input
-                      type="date"
-                      id={`input-${index}`}
-                      name="value"
-                      value={item.value}
-                      onChange={e => handleInputChange(e, index)}
-                    />
-                  )}
-                  {item.dataType === "Image" && (
-                    <input
-                      type="file"
-                      id={`input-${index}`}
-                      name="value"
-                      onChange={e => handleInputChange(e, index)}
-                      accept="image/*"
-                    />
-                  )}
-                  {item.dataType === "Geolocation" && (
-                    <div>
-                      <input
-                        type="text"
-                        id={`input-${index}`}
-                        name="value"
-                        value={item.value}
-                        onChange={e => handleInputChange(e, index)}
-                        placeholder="Latitude,Longitude"
-                      />
-                      <button type="button" onClick={() => handleGeolocation(index)}>
-                        Use Current Location
-                      </button>
-                    </div>
-                  )}
-                </div>
-                <div className="flex-row">
-                  {inputList.length !== 1 && (
-                    <button className='btn btn-lightblack'
-                      onClick={() => handleRemoveClick(index)}
-                    >
-                      Remove Field
-                    </button>
-                  )}
-                  {inputList.length - 1 === index && (
-                    <button className='btn btn-lightblack' onClick={handleAddClick}>
-                      Add Field
-                    </button>
-                    
-                  )}
-                  {inputList.length - 1 === index && (
-                    <button className='btn btn-red' onClick={handleSaveTemplate}>
-                      <p> Save Template</p>
-                    </button>
-                    
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+    <div>
+      <HeaderComponent />
+      <div className="custom-template-container">
+        <h1>Custom Template</h1>
+        <div className="template-name">
+          <label htmlFor="template-name">Template Name</label>
+          <input type="text" id="template-name" value={template.templateName} onChange={(event) => setTemplate({ ...template, templateName: event.target.value })} />
         </div>
+        <div className="fields-container">
+          {template.fieldsNames.map((fieldName, index) => (
+            <div key={index} className="template-field">
+              <input type="text" value={fieldName} onChange={(event) => handleFieldNameChange(index, event)} />
+              <select value={template.fieldsTypes[index]} onChange={(event) => handleFieldTypeChange(index, event)}>
+                {fieldTypes.map((fieldType, index) => (
+                  <option key={index} value={fieldType}>{fieldType}</option>
+                ))}
+              </select>
+              <button onClick={() => removeField(index)} className='btn btn-red'>Remove</button>
+            </div>
+          ))}
+        </div>
+        <button onClick={addField} className="btn btn-lightblack">Add Field</button>
+        <button onClick={saveTemplate} className='btn btn-red' >Save Template</button>
       </div>
-     <FooterComponent/>
-    </>
+      <FooterComponent />
+    </div>
   );
 }
+
 
 export default CustomTemplateComponent;

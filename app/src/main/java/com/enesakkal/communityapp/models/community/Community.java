@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -37,5 +38,5 @@ public class Community {
     private List<User> bannedUsers = List.of();
     private List<Post> posts = List.of();
     private List<String> tags = List.of();
-
-}
+    private List<Template> templates = List.of();
+    }

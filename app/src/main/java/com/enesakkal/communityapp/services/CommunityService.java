@@ -6,6 +6,8 @@ import com.enesakkal.communityapp.repositories.CommunityRepository;
 import com.enesakkal.communityapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -107,7 +109,12 @@ public class CommunityService {
         repository.save(community);
     }
 
-    public List<Community> getCommunitiesByIds(List<String> followedCommunities) {
-        return repository.findAllBy_id(followedCommunities);
+    public List<Community> findAllByMembersIn() {
+        List<User> userList2 = userRepository.findAll();
+
+        Collection<List<User>> members = new ArrayList<>();
+        members.add(userList2);
+
+        return repository.findAllByMembersIn(members);
     }
 }

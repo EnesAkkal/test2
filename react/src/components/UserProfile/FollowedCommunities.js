@@ -33,7 +33,7 @@ function FollowedCommunities() {
       <div className="posts_head">
         <div className="posts_topic">Community Name</div>
         <div className="Community_status">Status</div>
-        <div className="posts_category">Owner</div>
+        <div className="posts_category">Role</div>
         <div className="posts_replies">Posts</div>
         <div className="posts_views">Members</div>
       </div>

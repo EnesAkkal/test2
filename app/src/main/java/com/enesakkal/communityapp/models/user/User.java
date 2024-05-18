@@ -1,6 +1,7 @@
 package com.enesakkal.communityapp.models.user;
 
 import com.enesakkal.communityapp.dtos.UserDto;
+import com.enesakkal.communityapp.models.community.Template;
 import com.enesakkal.communityapp.models.post.Comment;
 import com.enesakkal.communityapp.models.post.Post;
 import lombok.AllArgsConstructor;

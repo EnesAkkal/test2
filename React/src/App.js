@@ -23,7 +23,7 @@ function App() {
         <Route path="/profile" element={<ProfilePageComponent />} />     
           <Route path="/community/:id" element={<CommunityComponent />} />
         <Route path="/community/settings/:activepage" element={<ManageCommunity />} />
-        <Route path='/community/createTemplate' element={<CustomTemplateComponent/>} />
+        <Route path='/community/:id/template' element={<CustomTemplateComponent/>} />
 
       </Route>
       <Route path="*" element={<Navigate to="/login" />} />

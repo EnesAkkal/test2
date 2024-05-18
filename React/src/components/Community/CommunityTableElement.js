@@ -14,8 +14,6 @@ const CommunityTableElement = ({ community }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Joining Community");
-        console.log(userId);
-        console.log(_id);
         joinCommunity(userId, _id);
     }
 

@@ -2,7 +2,6 @@ package com.enesakkal.communityapp.services;
 
 import com.enesakkal.communityapp.models.post.Comment;
 import com.enesakkal.communityapp.models.post.Post;
-import com.enesakkal.communityapp.models.post.Template;
 import com.enesakkal.communityapp.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,28 +15,21 @@ public class PostService {
         this.repository = repository;
     }
 
-    public String getPostById(String id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found")).getTitle();
+    public Post getPostById(String id) {
+        return repository.findBy_id(id).orElseThrow(() -> new RuntimeException("Post not found"));
     }
 
-    public void deletePostById(String id) {
+    public String deletePostById(String id) {
         repository.deleteById(id);
+        return "Post deleted successfully with id: " + id;
     }
 
-    public boolean existsByTitle(String title) {
-        return repository.existsByTitle(title);
-    }
-
-    public Post createPost(Post post) {
+    public Post putPost(Post post) {
         return repository.save(post);
     }
 
     public List<Comment> getComments(String id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found")).getComments();
-    }
-
-    public List<Template> getTemplates(String id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found")).getTemplates();
     }
 
     // Read operation
@@ -47,13 +39,8 @@ public class PostService {
 
     public Post updatePost(String id, Post post) {
         Post existingPost = repository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
-        existingPost.setTitle(post.getTitle());
-        existingPost.setBody(post.getBody());
-        existingPost.setCommunityId(post.getCommunityId());
         existingPost.setUpVotes(post.getUpVotes());
         existingPost.setDownVotes(post.getDownVotes());
-        existingPost.setCommentCount(post.getCommentCount());
-        existingPost.setTemplates(post.getTemplates());
         existingPost.setComments(post.getComments());
         // Do not set createdAt and lastModifiedDate manually
         return repository.save(existingPost);

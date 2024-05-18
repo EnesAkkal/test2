@@ -908,6 +908,7 @@ main {
   @media (min-width: 910px) {
     main .row {
       display: flex;
+      
     }
   
     main .row .left {

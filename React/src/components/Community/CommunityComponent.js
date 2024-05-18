@@ -29,17 +29,44 @@ function CommunityComponent() {
 
   const { id } = useParams();
   const [community, setCommunity] = useState({
-    name: "",
-    description: "",
-    owner: {},
-    moderators: [],
-    members: [],
-    posts: [],
-    tags: [],
-    createdAt: "",
-    lastModifiedDate: "",
+    _id: id,
+    name: "Community Name",
+    description: "Community Description",
+    isPrivate: false,
+    owner: {
+      "_id": "user1",
+      "username": "user1",
+      "email": "user1@example.com"
+      // other User fields
+    },
+    memberCount: 1,
     postCount: 0,
-    memberCount: 0
+    createdAt: "2022-01-01T00:00:00.000+00:00",
+    lastModifiedDate: "2022-01-01T00:00:00.000+00:00",
+    moderators: [],
+    members: [
+      {
+        "_id": "user1",
+        "username": "user1",
+        "email": "user1@example.com"
+        // other User fields
+      }
+    ],
+    bannedUsers: [],
+    posts: [],
+    tags: ["tag1", "tag2"],
+    templates: [
+      {
+        "_id": "template1",
+        "userId": "user1",
+        "templateName": "Default",
+        "fieldsNames": ["name", "description"],
+        "fieldsTypes": ["text", "text"],
+        "fieldsValues": ["Community Name", "Community Description"],
+        "createdAt": "2022-01-01T00:00:00.000+00:00",
+        "lastModifiedDate": "2022-01-01T00:00:00.000+00:00"
+      }
+    ]
   });
 
   useEffect(() => {
@@ -62,7 +89,7 @@ function CommunityComponent() {
   }
 
   const createTemplate = () => {
-    window.location.href = '/community/createTemplate';
+    window.location.href = '/community/' + id + '/template';
   }
 
   return (
@@ -79,11 +106,12 @@ function CommunityComponent() {
                 </div>
                 <div className="posts">
                   <ul>
-                    {community.posts.map((post) => (
-                      <li key={post._id}>
-                        <PostTableElement post={post} />
-                      </li>
-                    ))}
+                    {community.posts &&
+                      community.posts.map((post) => (
+                        <li key={post._id}>
+                          <PostTableElement post={post} />
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </section>
@@ -161,17 +189,20 @@ function CommunityComponent() {
                   <a href="#">
                     View All <FontAwesomeIcon icon={faArrowRight} />
                   </a>
-                  {community.members.map((member) => (
-                    <div className="inner-box">
-                      <div className="img">
-                        <img src={pp1} alt="" />
+                  {community.members.map((member) => {
+                    console.log("member",member);
+                    return (
+                      <div className="inner-box">
+                        <div className="img">
+                          <img src={pp1} alt="" />
+                        </div>
+                        <div className="details">
+                          <a href="#">{member.username}</a>
+                          <span>{community.posts.filter(x => x.userId == member._id).length} Posts</span>
+                        </div>
                       </div>
-                      <div className="details">
-                        <a href="#">{member.username}</a>
-                        <span>{community.posts.filter(x => x.userId == member._id).length} Posts</span>
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  })}
 
                 </div>
 

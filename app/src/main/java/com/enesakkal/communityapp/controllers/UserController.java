@@ -13,11 +13,9 @@ import java.util.List;
 public class UserController {
 
     private final UserService service;
-    private final CommunityService communityService;
 
-    public UserController(UserService service, CommunityService communityService) {
+    public UserController(UserService service) {
         this.service = service;
-        this.communityService = communityService;
     }
 
     @GetMapping("/{id}")
@@ -35,10 +33,9 @@ public class UserController {
         return ResponseEntity.ok(service.getUsers());
     }
 
-    @GetMapping("/{id}/communities")
-    public ResponseEntity<List<Community>> getCommunities(@PathVariable String id) {
-        List<String> followedCommunities = service.getUserById(id).getFollowedCommunities();
-        List<Community> communities = communityService.getCommunitiesByIds(followedCommunities);
-        return ResponseEntity.ok(communities);
+    @DeleteMapping("/deleteall")
+    public ResponseEntity<String> deleteAllUsers() {
+        service.deleteAllUsers();
+        return ResponseEntity.ok("All users are deleted");
     }
 }
