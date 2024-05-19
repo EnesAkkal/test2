@@ -166,11 +166,7 @@ function CommunityComponent() {
                       <FontAwesomeIcon icon={faSliders} /> Create Template
                     </a>
                   </div>
-                  <div className="buttons">
-                    <a href="#" className="btn btn-red" onClick={leaveCommunity}>
-                      <FontAwesomeIcon icon={faArrowRightFromBracket} /> Leave from the Community
-                    </a>
-                  </div>
+            
                 </div>
                 <div className="box recommended-communities">
                   <h3>Owner</h3>

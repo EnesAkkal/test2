@@ -6,7 +6,6 @@ import "../../styles/UserProfile.css";
 import HeaderComponent from "../HeaderComponent.js";
 import FooterComponent from "../FooterComponent.js";
 import ChangePassword from "../UserProfile/ChangePassword.js";
-import FollowedCommunities from "./FollowedCommunities.js";
 import ChangeNickname from "./ChangeNickname.js";
 
 const UserProfile = () => {
@@ -27,7 +26,6 @@ const UserProfile = () => {
           <div className="right">
             {activepage === "accountsettings" && <AccountSettings />}
             {activepage === "password" && <ChangePassword />}
-            {activepage === "followedcommunities" && <FollowedCommunities />}
             {activepage === "changenickname" && <ChangeNickname />}
             
           </div>
