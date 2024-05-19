@@ -38,7 +38,6 @@ out/
 /node_modules/.bin
 react/src/assets/pp1.jpg
 react/src/assets/pp2.png
-node_modules/.package-lock.json
 node_modules/@fortawesome/fontawesome-common-types/attribution.js
 node_modules/@fortawesome/fontawesome-common-types/index.d.ts
 node_modules/@fortawesome/fontawesome-common-types/LICENSE.txt
@@ -4008,7 +4007,6 @@ node_modules/react-is/package.json
 node_modules/react-is/README.md
 node_modules/react-is/umd/react-is.development.js
 node_modules/react-is/umd/react-is.production.min.js
-package-lock.json
-package.json
 node_modules
+/React/
 
