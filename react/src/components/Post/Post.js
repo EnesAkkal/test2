@@ -31,7 +31,7 @@ function Post() {
   const [template, setTemplate] = useState({
     templateName: "Default",
     fieldsNames: [
-      "name"
+      "Text"
     ],
     fieldsTypes: [
       "text"

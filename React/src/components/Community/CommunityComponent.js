@@ -97,7 +97,7 @@ function CommunityComponent() {
     const userId = auth._id;
     const communityId = community._id;
   
-    axios.post(`/community/${communityId}/leave`, { userId })
+    axios.get(`/community/${communityId}/leave`, { userId })
       .then((response) => {
         console.log(response.data);
         window.location.href = '/';
