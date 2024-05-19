@@ -4011,7 +4011,4 @@ node_modules/react-is/umd/react-is.production.min.js
 package-lock.json
 package.json
 node_modules
-react/Dockerfile
-docker-compose.yaml
-docker-compose2.yaml
-app/Dockerfile
+
