@@ -3,5 +3,5 @@ spring:
     name: communityApp
   data:
     mongodb:
-      uri: {SPRING_DATA_MONGODB_URI}
-      database: {SPRING_MONGODB_DATABASE}
+      uri: ${SPRING_DATA_MONGODB_URI}
+      database: ${SPRING_MONGODB_DATABASE}
